@@ -1,0 +1,1541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Helovesmath: Ultimate Math Resource - Calculators, Study Notes, Test Prep & More</title>
+    <meta name="description" content="Unlock your math potential with Helovesmath.com! Find comprehensive study notes, powerful online calculators, test prep materials (SAT, AP, IB, GCSE), homework help, and engaging math resources for all levels.">
+    <meta name="keywords" content="math, mathematics, helovesmath, calculators, study notes, test prep, SAT, AP, IB, GCSE, A-Level, homework resources, math games, math formulas, AI in math, free math help, online math tools, exam preparation">
+    <link rel="icon" href="https://helovesmath.com/favicon.ico" type="image/x-icon"> <!-- Assuming a favicon exists -->
+
+    <style>
+        :root {
+            --primary-color: #0056b3; /* Darker Blue for better contrast */
+            --secondary-color: #007bff; /* Lighter Blue */
+            --accent-color: #ffc107; /* Yellow for accents */
+            --background-color: #f0f2f5; /* Very light gray */
+            --text-color: #333;
+            --card-background: #fff;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 95%;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo a {
+            color: white;
+            text-decoration: none;
+            font-size: clamp(1.5rem, 4vw, 1.8rem);
+            font-weight: 700;
+        }
+
+        #main-nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        #main-nav ul li {
+            margin-left: 20px;
+        }
+
+        #main-nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        #main-nav ul li a:hover,
+        #main-nav ul li a.active {
+            background-color: rgba(255, 255, 255, 0.9);
+            color: var(--primary-color);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+
+        #hero {
+            background: linear-gradient(to bottom, #e9ecef, var(--background-color));
+            padding: clamp(40px, 10vw, 80px) 0;
+            text-align: center;
+        }
+
+        #hero h1 {
+            font-size: clamp(2rem, 6vw, 3.2rem);
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        #hero p {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            margin-bottom: 2.5rem;
+            color: #555;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #search-bar {
+            width: 100%;
+            max-width: 700px;
+            padding: 14px 18px;
+            font-size: 1.05rem;
+            border: 1px solid #ccc;
+            border-radius: var(--border-radius);
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        #search-bar:focus {
+            border-color: var(--secondary-color);
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25), inset 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .resource-container {
+            padding-top: 30px;
+            padding-bottom: 40px;
+        }
+
+        .category-group {
+            background-color: var(--card-background);
+            padding: 20px 25px;
+            margin-bottom: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transition: opacity 0.3s ease;
+        }
+
+        .category-group h2 {
+            font-size: clamp(1.5rem, 4vw, 1.9rem);
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            border-bottom: 2px solid #eef;
+            padding-bottom: 12px;
+            font-weight: 600;
+        }
+        .category-group h2 a {
+            color: inherit;
+            text-decoration: none;
+        }
+        .category-group h2 a:hover {
+            text-decoration: underline;
+        }
+
+        .link-list {
+            list-style: none;
+            padding-left: 0;
+            columns: 3; /* Default to three columns */
+            column-gap: 30px;
+        }
+
+        .link-list li {
+            margin-bottom: 10px;
+            padding: 3px 0;
+            break-inside: avoid-column;
+            font-size: 0.95rem;
+        }
+
+        .link-list li a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.2s ease;
+            font-weight: 500;
+        }
+
+        .link-list li a:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+        .link-list li .last-mod {
+            font-size: 0.8em;
+            color: #777;
+            margin-left: 5px;
+            white-space: nowrap;
+        }
+        .link-list li .images-flag {
+            font-size: 0.8em;
+            color: var(--accent-color);
+            margin-left: 5px;
+            font-weight: bold;
+        }
+
+
+        main {
+            flex-grow: 1;
+        }
+
+        footer {
+            background-color: #2a3f54; /* Darker footer */
+            color: #ddd;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: auto;
+        }
+        footer .footer-nav {
+            margin-bottom: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px 20px;
+        }
+        footer .footer-nav a {
+            color: #bbb;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+        footer .footer-nav a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            color: #999;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .link-list { columns: 2; }
+        }
+
+        @media (max-width: 768px) {
+            #main-nav {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background-color: var(--primary-color);
+                padding: 10px 0;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            }
+
+            #main-nav.active { display: flex; }
+            #main-nav ul { flex-direction: column; width: 100%; }
+            #main-nav ul li { margin: 10px 0; text-align: center; }
+            .mobile-menu-toggle { display: block; }
+            .link-list { columns: 1; }
+        }
+
+        .link-list li.hidden, .category-group.hidden-category {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="https://helovesmath.com/">Helovesmath.com</a>
+            </div>
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="#calculators-tools">Calculators & Tools</a></li>
+                    <li><a href="#study-notes-formulas">Study Notes</a></li>
+                    <li><a href="#test-prep-past-papers">Test Prep</a></li>
+                    <li><a href="#homework-worksheets">Homework</a></li>
+                    <li><a href="#more-content">More</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="container">
+                <h1>Your Ultimate Math Learning & Resource Hub</h1>
+                <p>Explore a vast collection of calculators, in-depth study guides, comprehensive test preparation materials, homework help, and much more to conquer math at any level.</p>
+                <input type="search" id="search-bar" placeholder="Search all Helovesmath resources (e.g., 'algebra', 'SAT', 'loan calculator')..." aria-label="Search resources">
+            </div>
+        </section>
+
+        <div class="container resource-container" id="all-resources-container">
+            <!-- Categories and links will be dynamically inserted here by JavaScript -->
+            <p id="loading-message" style="text-align:center; font-size: 1.2em; padding: 20px;">Loading resources...</p>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-nav" id="footer-policy-links">
+                <!-- Policy links will be inserted here by JS -->
+            </div>
+            <p>&copy; <span id="current-year"></span> Helovesmath.com. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+    // Raw OCR Data (concatenated and slightly pre-processed for easier parsing)
+    // In a real scenario, this would be fetched or be part of a build process
+    const ocrDataString = `
+https://helovesmath.com/study-notes/multiply-whole-numbers/ 0 2025-04-25 23:26 +00:00
+https://helovesmath.com/sat/sat-practice-test-2024-updated-40-free-pdf/ 1 2025-04-25 23:26 +00:00
+https://helovesmath.com/news/the-history-of-counting-from-fingers-to-infinity/ 1 2025-04-25 23:24 +00:00
+https://helovesmath.com/data-science/the-kolmogorov-smirnov-k-s-test/ 0 2025-04-25 23:22 +00:00
+https://helovesmath.com/calculator/kilogram-to-pounds-converter/ 0 2025-04-25 23:21 +00:00
+https://helovesmath.com/basic-math/ratio-meaning-simplification-table-examples/ 0 2025-04-25 23:19 +00:00
+https://helovesmath.com/calculator/amortization-calculator-2/ 1 2025-04-25 23:19 +00:00
+https://helovesmath.com/basic-math/exponents-complete-study-guide/ 0 2025-04-25 23:17 +00:00
+https://helovesmath.com/basic-math/decimals-in-maths-definition-types-properties-conversion-and-examples/ 0 2025-04-25 23:14 +00:00
+https://helovesmath.com/ai/claude-3-7-sonnet-api-a-comprehensive-guide-with-demo-project/ 1 2025-04-25 23:14 +00:00
+https://helovesmath.com/homework-resources/estimate-business-tax/ 1 2025-04-25 23:01 +00:00
+https://helovesmath.com/calculator/length-conversion/ 1 2025-04-25 22:47 +00:00
+https://helovesmath.com/calculator/loan-calculator/ 1 2025-04-25 22:11 +00:00
+https://helovesmath.com/tools/auto-loan-calculator-2/ 1 2025-04-25 21:35 +00:00
+https://helovesmath.com/tools/times-table/ 1 2025-04-25 20:53 +00:00
+https://helovesmath.com/tools/gpa-calculator/ 1 2025-04-25 20:45 +00:00
+https://helovesmath.com/study-notes/gravitational-force-fgmg/ 1 2025-04-25 20:42 +00:00
+https://helovesmath.com/tools/calorie-calculator/ 1 2025-04-25 20:36 +00:00
+https://helovesmath.com/tools/addition-worksheet-generator/ 0 2025-04-25 15:16 +00:00
+https://helovesmath.com/math/printable-multiplication-charts/ 8 2025-04-25 14:39 +00:00
+https://helovesmath.com/math/how-to-calculate-relative-frequency/ 1 2025-04-25 14:36 +00:00
+https://helovesmath.com/math/how-to-calculate-profit-margin/ 1 2025-04-25 14:33 +00:00
+https://helovesmath.com/math/fractions-and-decimals/ 0 2025-04-25 14:31 +00:00
+https://helovesmath.com/math/advanced-multiplication-table-generator/ 1 2025-04-25 14:26 +00:00
+https://helovesmath.com/homework-resources/sector-area-calculator/ 0 2025-04-25 13:58 +00:00
+https://helovesmath.com/calculator/time-calculator-2/ 1 2025-04-25 13:55 +00:00
+https://helovesmath.com/calculator/rectangular-tank-volume-calculator/ 0 2025-04-25 13:51 +00:00
+https://helovesmath.com/calculator/fraction-calculator-free-tool/ 0 2025-04-25 13:46 +00:00
+https://helovesmath.com/calculator/btu-hr-to-kw-conversion/ 1 2025-04-25 13:28 +00:00
+https://helovesmath.com/calculator/circle-diameter-calculator/ 0 2025-04-25 13:25 +00:00
+https://helovesmath.com/calculator/btu-hr-to-watts-conversion/ 1 2025-04-25 13:15 +00:00
+https://helovesmath.com/calculator/binary-calculator/ 0 2025-04-25 13:08 +00:00
+https://helovesmath.com/calculator/bhp-to-kw-conversion/ 1 2025-04-25 13:04 +00:00
+https://helovesmath.com/calculator/3d-distance-calculator/ 0 2025-04-25 12:56 +00:00
+https://helovesmath.com/guides/how-to-start-a-business-in-dubai-a-step-by-step-guide-for-entrepreneurs/ 1 2025-04-25 12:31 +00:00
+https://helovesmath.com/calculator/free-time-calculator/ 0 2025-04-25 00:04 +00:00
+https://helovesmath.com/calculator/free-age-calculator/ 0 2025-04-24 23:55 +00:00
+https://helovesmath.com/calculator/estate-tax-calculator/ 0 2025-04-24 23:41 +00:00
+https://helovesmath.com/math/easiest-way-to-learn-multiplication-tables/ 1 2025-04-24 22:32 +00:00
+https://helovesmath.com/math/the-multiplication-table/ 1 2025-04-24 22:31 +00:00
+https://helovesmath.com/mental-math/mental-math-boost-brain-power/ 1 2025-04-24 10:42 +00:00
+https://helovesmath.com/ai/everything-you-need-to-know-about-deepseek/ 1 2025-04-24 03:29 +00:00
+https://helovesmath.com/ap/how-to-prepare-for-ap-exams/ 0 2025-04-24 00:09 +00:00
+https://helovesmath.com/ap/best-ap-classes-for-college-admissions-2025-guide/ 0 2025-04-24 00:08 +00:00
+https://helovesmath.com/ap/ap-exam-dates-2025/ 0 2025-04-24 00:08 +00:00
+https://helovesmath.com/ap/ap-psychology/ 0 2025-04-24 00:05 +00:00
+https://helovesmath.com/ap/which-ap-courses-should-i-take-for-engineering/ 0 2025-04-24 00:04 +00:00
+https://helovesmath.com/ap/are-ap-classes-harder-than-college/ 0 2025-04-24 00:04 +00:00
+https://helovesmath.com/ap/how-many-ap-classes-should-i-take/ 0 2025-04-24 00:03 +00:00
+https://helovesmath.com/ap/do-colleges-prefer-ap-or-ib/ 0 2025-04-24 00:02 +00:00
+https://helovesmath.com/ap/what-happens-if-you-fail-an-ap-exam/ 0 2025-04-24 00:02 +00:00
+https://helovesmath.com/ap/is-ap-calculus-bc-harder-than-ab/ 0 2025-04-23 23:59 +00:00
+https://helovesmath.com/ap/is-ib-more-challenging-than-ap/ 1 2025-04-23 23:59 +00:00
+https://helovesmath.com/ap/ap-vs-a-levels-comparison/ 1 2025-04-23 23:58 +00:00
+https://helovesmath.com/ap/ap-exams-complete-guide/ 0 2025-04-23 23:55 +00:00
+https://helovesmath.com/ap/do-you-really-get-100-for-passing-an-ap-exam/ 0 2025-04-23 23:47 +00:00
+https://helovesmath.com/ap/is-a-70-a-5-on-the-ap-exam/ 0 2025-04-23 23:41 +00:00
+https://helovesmath.com/ap/is-ap-harder-than-the-sat-lets-break-it-down/ 0 2025-04-23 23:26 +00:00
+https://helovesmath.com/ap/what-does-the-ap-exam-for-you/ 0 2025-04-23 23:20 +00:00
+https://helovesmath.com/ai/deepseek-r1-a-comprehensive-analysis/ 4 2025-04-22 22:45 +00:00
+https://helovesmath.com/ai/deepseek-r1-vs-llms-like-gpt-4/ 0 2025-04-22 22:04 +00:00
+https://helovesmath.com/ai/deep-search-explained/ 1 2025-04-22 06:26 +00:00
+https://helovesmath.com/math/math-equations-every-student-should-know/ 0 2025-04-22 04:10 +00:00
+https://helovesmath.com/math/pemdas-and-order-of-operations/ 0 2025-04-22 03:31 +00:00
+https://helovesmath.com/math/exponents-and-powers-of-10-grade-5/ 0 2025-04-22 03:22 +00:00
+https://helovesmath.com/math/division-strategies-made-easy-long-division/ 0 2025-04-22 03:17 +00:00
+https://helovesmath.com/math/multiplication-from-area-models/ 0 2025-04-22 03:02 +00:00
+https://helovesmath.com/math/fractions-visual-models-comparisons/ 0 2025-04-22 02:53 +00:00
+https://helovesmath.com/math/5th%e2%80%91grade-math-mini%e2%80%91lessons/ 0 2025-04-22 02:14 +00:00
+https://helovesmath.com/ai/vibe-coding-a-new-era/ 1 2025-04-21 01:39 +00:00
+https://helovesmath.com/ai/deepseek-r2-early-release-innovation/ 0 2025-04-21 01:32 +00:00
+https://helovesmath.com/ai/deepseek-v3-1-the-new-frontier-in-ai/ 0 2025-04-21 01:28 +00:00
+https://helovesmath.com/ai/what-is-deepseek-ai-r1/ 0 2025-04-21 01:24 +00:00
+https://helovesmath.com/ai/llama-4-vs-deepseek-ai-the-battle/ 0 2025-04-21 01:20 +00:00
+https://helovesmath.com/ai/deepseek-ai-launches/ 0 2025-04-21 01:16 +00:00
+https://helovesmath.com/chatgpt/is-chat-gpt-free/ 1 2025-04-21 00:26 +00:00
+https://helovesmath.com/ai/the-best-ai-for-math/ 1 2025-04-21 00:25 +00:00
+https://helovesmath.com/ai/the-best-chatgpt-prompts-2025/ 0 2025-04-20 00:37 +00:00
+https://helovesmath.com/ib/ib-vs-a-levels-full-comparison/ 0 2025-04-19 23:41 +00:00
+https://helovesmath.com/gcse-past-papers/7-effective-revision-techniques-for-gcse-a-level/ 0 2025-04-19 23:25 +00:00
+https://helovesmath.com/gcse-past-papers/solving-quadratics-gcse-algebra-guide/ 1 2025-04-19 23:19 +00:00
+https://helovesmath.com/ib/what-examiners-wish-students-knew-about-ib-assessments/ 1 2025-04-19 23:08 +00:00
+https://helovesmath.com/ib/how-i-got-a-45-in-ib/ 1 2025-04-19 22:47 +00:00
+https://helovesmath.com/math/what-are-3d-shapes-and-which-3d-shapes-names-do-kids-learn-at-primary-school/ 1 2025-04-19 00:45 +00:00
+https://helovesmath.com/calculator/long-division-calculator/ 0 2025-04-18 23:01 +00:00
+https://helovesmath.com/sqa/sqa-nq-past-papers-and-marking-instructions/ 0 2025-04-18 22:54 +00:00
+https://helovesmath.com/calculator/kg-to-lbs-convert-kg-to-pounds/ 1 2025-04-18 22:49 +00:00
+https://helovesmath.com/calculator/watts-to-amps-calculator-how-to-convert-watts-to-amps/ 1 2025-04-18 22:45 +00:00
+https://helovesmath.com/tools/free-grade-calculator/ 1 2025-04-18 22:37 +00:00
+https://helovesmath.com/guides/the-exam-prep-guide/ 0 2025-04-18 01:29 +00:00
+https://helovesmath.com/business-management/register-a-company/ 0 2025-04-18 01:08 +00:00
+https://helovesmath.com/ap-psychology/how-to-study-for-ap-psychology-in-30-days/ 0 2025-04-18 00:51 +00:00
+https://helovesmath.com/math/addition-and-subtraction-of-fractions/ 0 2025-04-18 00:09 +00:00
+https://helovesmath.com/math/the-good-and-the-beautiful-math/ 1 2025-04-18 00:04 +00:00
+https://helovesmath.com/ap/ap-calculus-ab-vs-bc/ 0 2025-04-17 23:43 +00:00
+https://helovesmath.com/cheatsheet/ap-biology-2025-cheat-sheet/ 0 2025-04-17 22:14 +00:00
+https://helovesmath.com/ai/what-is-a-data-robot/ 1 2025-04-17 10:05 +00:00
+https://helovesmath.com/ib/ib-score-calculator-predicted-grades-understand-ib-scoring-2025-guide/ 1 2025-04-16 05:08 +00:00
+https://helovesmath.com/ib/ib-vs-a-level-which-is-better-full-comparison-for-students-parents/ 1 2025-04-16 04:02 +00:00
+https://helovesmath.com/ib/ib-ee-extended-essay-examples-real-topics-high-scoring-templates/ 1 2025-04-16 03:53 +00:00
+https://helovesmath.com/ib/ib-cas-project-ideas-creative-service-activity-based-examples-for-2025/ 1 2025-04-16 03:44 +00:00
+https://helovesmath.com/ib/ib-exam-schedule-2025-complete-may-november-timetable-tips/ 1 2025-04-16 03:32 +00:00
+https://helovesmath.com/ib/ib-math-sl-revision-guide-expert-tips-past-papers-ia-ideas/ 1 2025-04-16 03:21 +00:00
+https://helovesmath.com/ib/ib-math-hl-revision-guide-strategies-past-papers-ia-tips/ 1 2025-04-16 03:13 +00:00
+https://helovesmath.com/guides/business-setup-in-dubai-complete-guide-for-2025/ 1 2025-04-16 02:44 +00:00
+https://helovesmath.com/ai/understanding-deepseeks-moe-architecture-how-it-works-and-why-it-matters/ 1 2025-04-16 00:07 +00:00
+https://helovesmath.com/ai/deepseek-ai-the-rising-star-in-the-ai-ecosystem/ 1 2025-04-15 23:58 +00:00
+https://helovesmath.com/ib/top-10-tips-to-prepare-for-ib-exams-and-actually-succeed/ 1 2025-04-15 17:52 +00:00
+https://helovesmath.com/ib/what-is-the-international-baccalaureate-ib-program-the-ultimate-parent-student-guide/ 1 2025-04-15 17:40 +00:00
+https://helovesmath.com/calculator/how-to-calculate-your-ib-score-and-what-it-means-for-predicted-grades-and-ucas-points/ 1 2025-04-14 00:14 +00:00
+https://helovesmath.com/ib/what-is-the-ib-learner-profile-a-deep-dive-into-the-10-attributes-of-global-learners/ 1 2025-04-13 23:23 +00:00
+https://helovesmath.com/ib/top-10-benefits-of-the-ib-program-why-its-a-smart-choice-for-students/ 1 2025-04-13 23:09 +00:00
+https://helovesmath.com/ib/ib-curriculum-vs-british-curriculum-a-complete-comparison-for-international-families/ 1 2025-04-13 22:55 +00:00
+https://helovesmath.com/ib/how-many-subjects-are-there-in-the-ib-diploma-ib-curriculum-explained-simply/ 1 2025-04-13 22:39 +00:00
+https://helovesmath.com/news/what-is-the-full-form-of-igcse-a-complete-guide-to-international-school-curriculum-acronyms/ 1 2025-04-13 22:31 +00:00
+https://helovesmath.com/ib/is-ib-harder-than-a-levels-full-comparison-for-students-parents/ 1 2025-04-13 22:20 +00:00
+https://helovesmath.com/ib/is-ib-harder-than-ap-a-side-by-side-comparison-for-students-and-parents/ 1 2025-04-13 22:08 +00:00
+https://helovesmath.com/ocr/ocr-gateway-gcse-chemistry-past-papers/ 0 2025-04-04 05:08 +00:00
+https://helovesmath.com/income-tax/the-commissioner-of-income-tax/ 0 2025-04-04 05:08 +00:00
+https://helovesmath.com/news/fix-your-organizations-data-cannot-be-pasted-here-error/ 0 2025-04-04 05:08 +00:00
+https://helovesmath.com/news/30-companies-hiring-work-from-anywhere-remote-jobs-in-2025/ 1 2025-04-04 05:07 +00:00
+https://helovesmath.com/projects/50-latest-home-automation-projects-for-engineering-students/ 1 2025-04-04 05:04 +00:00
+https://helovesmath.com/homework-resources/ocr-a-level-maths-mechanics-past-papers/ 0 2025-04-04 04:18 +00:00
+https://helovesmath.com/homework-resources/cie-a-level-maths-mechanics-past-papers/ 0 2025-04-04 04:17 +00:00
+https://helovesmath.com/homework-resources/physics-igcse-past-papers/ 0 2025-04-04 04:15 +00:00
+https://helovesmath.com/junior-math/ratios-proportions-outline-helovesmath/ 1 2025-04-04 04:14 +00:00
+https://helovesmath.com/homework-resources/biology-complete-guide/ 1 2025-04-04 04:14 +00:00
+https://helovesmath.com/projects/the-12-best-electronics-component-kits-for-beginners/ 1 2025-04-04 04:14 +00:00
+https://helovesmath.com/projects/best-lcd-display-for-raspberry-pi-for-beginners/ 1 2025-04-04 04:13 +00:00
+https://helovesmath.com/projects/best-raspberry-pi-starter-kits-for-beginners-in-2024/ 1 2025-04-04 04:13 +00:00
+https://helovesmath.com/projects/top-7-best-arduino-robot-kits-for-beginners-2024-reviews/ 1 2025-04-04 04:13 +00:00
+https://helovesmath.com/projects/10-best-arduino-starter-kits-for-beginners-to-buy-in-2024/ 1 2025-04-04 04:12 +00:00
+https://helovesmath.com/projects/30-arduino-compatible-modules-list-arduino-modules/ 1 2025-04-04 04:12 +00:00
+https://helovesmath.com/projects/200-arduino-projects-list-for-final-year-students/ 1 2025-04-04 04:12 +00:00
+https://helovesmath.com/projects/100-robotics-projects-for-final-year-engineering-students/ 1 2025-04-04 04:11 +00:00
+https://helovesmath.com/news/top-10-engineering-colleges-in-india-2024-nirf-ranking/ 1 2025-04-04 04:10 +00:00
+https://helovesmath.com/jee-exam/best-books-for-jee-preparation-2024-2025-main-advanced/ 1 2025-04-04 04:10 +00:00
+https://helovesmath.com/neet/neet-previous-year-papers-download-pdf/ 1 2025-04-04 04:10 +00:00
+https://helovesmath.com/jee-exam/download-jee-main-previous-year-papers/ 1 2025-04-04 04:09 +00:00
+https://helovesmath.com/jee-exam/iit-jee-previous-year-papers-pdf-jee-advanced-question-paper/ 1 2025-04-04 04:09 +00:00
+https://helovesmath.com/sat/the-math-section-overview-sat-exam/ 1 2025-04-04 04:08 +00:00
+https://helovesmath.com/math/pentominoes-pi-symbol-puzzle/ 0 2025-04-04 04:08 +00:00
+https://helovesmath.com/math/7-ways-to-inspire-students-to-love-math/ 0 2025-04-04 04:08 +00:00
+https://helovesmath.com/math/topics-in-depth-project/ 1 2025-04-04 04:07 +00:00
+https://helovesmath.com/as-and-a-level/a-level-revision-resources/ 1 2025-04-04 04:06 +00:00
+https://helovesmath.com/math/gcse-geometry-and-measures/ 1 2025-04-04 04:06 +00:00
+https://helovesmath.com/edexcel/a-level-maths-new-spec-edexcel-aqa-ocr/ 1 2025-04-04 04:06 +00:00
+https://helovesmath.com/math/gcse-statistics-worksheets/ 1 2025-04-04 04:05 +00:00
+https://helovesmath.com/math/gcse-algebra-worksheets/ 1 2025-04-04 04:05 +00:00
+https://helovesmath.com/aqa/aqa-gcse-higher-revision/ 1 2025-04-04 04:05 +00:00
+https://helovesmath.com/gcse-past-papers/further-maths/ 1 2025-04-04 04:05 +00:00
+https://helovesmath.com/math/which-is-easier/ 1 2025-04-04 04:04 +00:00
+https://helovesmath.com/math/gcse-9-1-practice-papers/ 1 2025-04-04 04:04 +00:00
+https://helovesmath.com/math/practical-ideas-lies-box-plots-party-100-people-triangles-displays/ 1 2025-04-04 04:04 +00:00
+https://helovesmath.com/ap/ap-statistics-past-exam-questions/ 1 2025-04-04 04:04 +00:00
+https://helovesmath.com/ap/ap-calculus-bc-past-exam-questions/ 1 2025-04-04 04:03 +00:00
+https://helovesmath.com/ap/ap-calculus-ab-past-exam-questions/ 1 2025-04-04 04:03 +00:00
+https://helovesmath.com/homework-resources/mechanics/ 1 2025-04-04 04:03 +00:00
+https://helovesmath.com/cambridge-international-as-a-level/statistics-content-in-a-level-maths/ 1 2025-04-04 04:03 +00:00
+https://helovesmath.com/math/pure-mathematics-in-year-13/ 1 2025-04-04 04:02 +00:00
+https://helovesmath.com/math/using-structure-to-calculate-and-estimate/ 1 2025-04-04 04:02 +00:00
+https://helovesmath.com/homework-resources/a-level-homework/ 1 2025-04-04 04:01 +00:00
+https://helovesmath.com/homework-resources/collecting-and-summarising-data-homework/ 1 2025-04-04 04:01 +00:00
+https://helovesmath.com/homework-resources/homework-worksheet-for-shape/ 1 2025-04-04 04:01 +00:00
+https://helovesmath.com/homework-resources/homework-worksheet-for-algebra/ 1 2025-04-04 04:00 +00:00
+https://helovesmath.com/homework-resources/homework-worksheet-for-numbers/ 1 2025-04-04 04:00 +00:00
+https://helovesmath.com/mathematics/angles-in-polygons-cpd/ 1 2025-04-04 04:00 +00:00
+https://helovesmath.com/mathematics/answering-your-questions-on-estimation/ 1 2025-04-04 03:59 +00:00
+https://helovesmath.com/mathematics/why-one-is-not-a-prime-number-prime-numbers-explained/ 1 2025-04-04 03:59 +00:00
+https://helovesmath.com/ap-computer-science-principles/3-1-variables-and-assignments-ap-computer-science-principles/ 0 2025-03-28 23:56 +00:00
+https://helovesmath.com/ap-computer-science-principles/big-idea-3-algorithms-and-programming-the-ultimate-guide-for-ap-computer-science-principles/ 0 2025-03-28 23:36 +00:00
+https://helovesmath.com/ap-computer-science-principles/2-4-using-programs-with-data-ap-computer-science-principles/ 0 2025-03-28 23:16 +00:00
+https://helovesmath.com/ap-computer-science-principles/2-3-extracting-information-from-data-ap-computer-science-principles/ 0 2025-03-28 23:08 +00:00
+https://helovesmath.com/ap-computer-science-principles/2-2-data-compression-your-in-depth-guide-for-ap-computer-science-principles/ 0 2025-03-28 23:01 +00:00
+https://helovesmath.com/ap-computer-science-principles/big-idea-2-overview-data-ap-computer-science-principles/ 0 2025-03-28 22:49 +00:00
+https://helovesmath.com/ap-computer-science-principles/1-4-identifying-and-correcting-errors-ap-computer-science-principles/ 0 2025-03-28 22:16 +00:00
+https://helovesmath.com/ap-computer-science-principles/1-3-program-design-and-development-in-ap-computer-science-principles/ 0 2025-03-28 22:03 +00:00
+https://helovesmath.com/ap-computer-science-principles/1-2-program-function-and-purpose-in-ap-computer-science-principles/ 0 2025-03-28 21:55 +00:00
+https://helovesmath.com/ap-computer-science-principles/1-1-collaboration-in-ap-computer-science-principles/ 0 2025-03-28 21:47 +00:00
+https://helovesmath.com/ap-computer-science-principles/big-idea-1-overview-creative-development-in-ap-computer-science-principles/ 0 2025-03-28 21:41 +00:00
+https://helovesmath.com/calculator/conical-frustum-volume-calculator/ 0 2025-03-28 21:19 +00:00
+https://helovesmath.com/basic-math/percentage-how-to-calculate-formula-and-tricks/ 0 2025-03-20 02:18 +00:00
+https://helovesmath.com/basic-math/fractions-definition-types-properties-and-examples/ 0 2025-03-20 02:07 +00:00
+https://helovesmath.com/basic-math/division-meaning-steps-algorithm-examples/ 0 2025-03-20 01:53 +00:00
+https://helovesmath.com/basic-math/addition-meaning-definition-examples-what-is-addition/ 0 2025-03-20 01:47 +00:00
+https://helovesmath.com/basic-math/what-is-subtract-definition-method-examples-facts/ 0 2025-03-20 01:42 +00:00
+https://helovesmath.com/basic-math/multiplication-definition-formula-examples/ 0 2025-03-20 01:36 +00:00
+https://helovesmath.com/study-notes/world-war-i/ 1 2025-03-19 23:48 +00:00
+https://helovesmath.com/formulas/the-pythagorean-theorem-formula/ 1 2025-03-15 01:03 +00:00
+https://helovesmath.com/news/ancient-egyptian-mathematics-5-revolutionary-innovations-that-shaped-history/ 1 2025-03-15 00:45 +00:00
+https://helovesmath.com/news/can-you-solve-this-parking-space-puzzle-that-went-viral-in-hong-kong/ 1 2025-03-15 00:28 +00:00
+https://helovesmath.com/news/the-hardest-easy-math-problem-the-4x4-4%c3%b744-challenge/ 1 2025-03-15 00:09 +00:00
+https://helovesmath.com/sat/does-lincoln-tech-require-sat-scores/ 1 2025-03-14 23:25 +00:00
+https://helovesmath.com/formulas/mathematical-symbols-and-their-meanings-math-symbols/ 0 2025-03-13 02:37 +00:00
+https://helovesmath.com/formulas/mathematics-formula-defination/ 0 2025-03-12 22:12 +00:00
+https://helovesmath.com/formulas/list-of-math-formulas/ 1 2025-03-12 21:38 +00:00
+https://helovesmath.com/homework-resources/manus-ai-features-architecture-access-early-issues-more/ 1 2025-03-12 01:47 +00:00
+https://helovesmath.com/data-science/shap-plots-a-deep-dive-into-explainable-ai/ 0 2025-03-12 01:38 +00:00
+https://helovesmath.com/calculator/exponent-calculator/ 0 2025-03-12 01:07 +00:00
+https://helovesmath.com/math-game/the-multiplication-table-game/ 0 2025-03-12 00:56 +00:00
+https://helovesmath.com/study-notes/gravitational-force-escape-velocity-definition-formula-examples-solved-examples-video-and-faqs/ 0 2025-03-12 00:38 +00:00
+https://helovesmath.com/fitness-and-health-calculators/pregnancy-calculator/ 0 2025-03-11 23:51 +00:00
+https://helovesmath.com/fitness-and-health-calculators/macro-calculator-2/ 0 2025-03-11 23:18 +00:00
+https://helovesmath.com/fitness-and-health-calculators/body-fat-calculator/ 0 2025-03-11 21:45 +00:00
+https://helovesmath.com/fitness-and-health-calculators/bmi-calculator-3/ 0 2025-03-11 21:16 +00:00
+https://helovesmath.com/study-notes/potentiometers-thermistors-pyrometers/ 0 2025-03-09 15:21 +00:00
+https://helovesmath.com/study-notes/electrical-temperature-instruments/ 0 2025-03-09 14:43 +00:00
+https://helovesmath.com/homework-resources/electrical-pressure-measurements-strain-gauges-transducers/ 0 2025-03-09 14:03 +00:00
+https://helovesmath.com/calculator/pythagorean-theorem-calculator/ 0 2025-03-09 01:49 +00:00
+https://helovesmath.com/calculator/gpa-calculator-3/ 1 2025-03-06 01:51 +00:00
+https://helovesmath.com/math-calculator/geometric-mean-calculator/ 0 2025-03-06 00:54 +00:00
+https://helovesmath.com/math-calculator/empirical-rule-calculator-68-95-99-rule/ 0 2025-03-06 00:47 +00:00
+https://helovesmath.com/math-calculator/confidence-interval-calculator/ 0 2025-03-06 00:31 +00:00
+https://helovesmath.com/math-calculator/combination-calculator/ 0 2025-03-06 00:15 +00:00
+https://helovesmath.com/math-calculator/coefficient-of-variation-calculator/ 0 2025-03-06 00:02 +00:00
+https://helovesmath.com/math-calculator/central-limit-theorem-calculator/ 0 2025-03-05 23:57 +00:00
+https://helovesmath.com/math-calculator/binomial-distribution-calculator/ 0 2025-03-05 23:49 +00:00
+https://helovesmath.com/math-calculator/bayes-theorem-calculator/ 0 2025-03-05 23:42 +00:00
+https://helovesmath.com/math-calculator/average-calculator/ 0 2025-03-05 23:37 +00:00
+https://helovesmath.com/math-calculator/subtracting-fractions-calculator/ 0 2025-03-05 23:24 +00:00
+https://helovesmath.com/math-calculator/solve-for-unknown-fraction-calculator/ 0 2025-03-05 23:18 +00:00
+https://helovesmath.com/math-calculator/mixed-number-to-improper-fraction-calculator/ 0 2025-03-05 23:11 +00:00
+https://helovesmath.com/math-calculator/mixed-number-calculator/ 0 2025-03-05 23:05 +00:00
+https://helovesmath.com/math-resources/lcd-calculator-least-common-denominator/ 0 2025-03-05 22:59 +00:00
+https://helovesmath.com/math-calculator/inch-fraction-calculator-decimal-to-inches/ 0 2025-03-05 22:52 +00:00
+https://helovesmath.com/math-calculator/improper-fraction-to-mixed-number-calculator-2/ 0 2025-03-05 22:46 +00:00
+https://helovesmath.com/math-calculator/fraction-to-ratio-calculator/ 0 2025-03-05 22:40 +00:00
+https://helovesmath.com/math-calculator/fraction-to-percent-calculator/ 0 2025-03-05 22:35 +00:00
+https://helovesmath.com/math-calculator/fraction-to-decimal-calculator/ 0 2025-03-05 22:25 +00:00
+https://helovesmath.com/math-calculator/fraction-simplifier-fraction-reducer/ 0 2025-03-05 22:16 +00:00
+https://helovesmath.com/math-calculator/fraction-calculator-ultimate-fraction-solver/ 0 2025-03-05 22:07 +00:00
+https://helovesmath.com/math-calculator/equivalent-fractions-calculator/ 0 2025-03-05 21:55 +00:00
+https://helovesmath.com/math-calculator/decimal-to-fraction-calculator/ 0 2025-03-05 21:48 +00:00
+https://helovesmath.com/math-calculator/comparing-fractions-calculator/ 0 2025-03-05 21:35 +00:00
+https://helovesmath.com/math-calculator/adding-fractions-calculator/ 0 2025-03-05 21:12 +00:00
+https://helovesmath.com/calculator/density-calculator/ 0 2025-03-05 10:12 +00:00
+https://helovesmath.com/calculator/rise-over-run-to-degrees-calculator/ 0 2025-03-05 09:35 +00:00
+https://helovesmath.com/calculator/improper-fraction-to-mixed-number-calculator/ 0 2025-03-05 09:16 +00:00
+https://helovesmath.com/calculator/average-rate-of-change-calculator/ 0 2025-03-05 09:07 +00:00
+https://helovesmath.com/tools/online-gratuity-calculator-uae-2024/ 1 2025-03-05 09:01 +00:00
+https://helovesmath.com/calculator/uae-gratuity-calculator/ 1 2025-03-05 07:27 +00:00
+https://helovesmath.com/calculator/body-shape-calculator-what-body-type-are-you/ 0 2025-03-04 22:47 +00:00
+https://helovesmath.com/calculator/cooking-conversion-calculator/ 0 2025-03-04 22:24 +00:00
+https://helovesmath.com/calculator/mg-to-ml-conversion-milligrams-to-milliliters/ 0 2025-03-04 22:13 +00:00
+https://helovesmath.com/calculator/liters-to-kilograms-conversion-calculator/ 0 2025-03-04 22:10 +00:00
+https://helovesmath.com/calculator/grams-to-milliliters-conversion-calculator/ 0 2025-03-04 22:06 +00:00
+https://helovesmath.com/calculator/degrees-to-radians-converter/ 0 2025-03-04 21:59 +00:00
+https://helovesmath.com/calculator/wainscoting-layout-calculator/ 0 2025-03-04 21:53 +00:00
+https://helovesmath.com/calculator/square-footage-calculator/ 0 2025-03-04 20:45 +00:00
+https://helovesmath.com/calculator/scale-conversion-calculator-scale-factor-calculator/ 0 2025-03-04 20:39 +00:00
+https://helovesmath.com/calculator/feet-and-inches-calculator/ 0 2025-03-04 20:33 +00:00
+https://helovesmath.com/calculator/tech-and-electronics-converters/ 0 2025-03-04 02:43 +00:00
+https://helovesmath.com/calculator/numeral-systems-converter/ 0 2025-03-04 02:39 +00:00
+https://helovesmath.com/calculator/number-converters/ 0 2025-03-04 02:34 +00:00
+https://helovesmath.com/calculator/earth-measurements-converters/ 0 2025-03-04 02:16 +00:00
+https://helovesmath.com/calculator/force-pressure-and-torque-converter/ 0 2025-03-04 02:09 +00:00
+https://helovesmath.com/calculator/weight-converter-2/ 0 2025-03-04 02:03 +00:00
+https://helovesmath.com/calculator/volume-converter/ 0 2025-03-04 01:59 +00:00
+https://helovesmath.com/calculator/area-converter/ 0 2025-03-04 01:55 +00:00
+https://helovesmath.com/calculator/length-converter-2/ 0 2025-03-04 01:44 +00:00
+https://helovesmath.com/calculator/arccos-calculator/ 0 2025-03-04 01:39 +00:00
+https://helovesmath.com/calculator/fractions-calculator-2/ 0 2025-03-04 01:32 +00:00
+https://helovesmath.com/calculator/average-percentage-calculator/ 0 2025-03-04 01:17 +00:00
+https://helovesmath.com/calculator/co%e2%82%82-breathing-emission-calculator/ 0 2025-03-04 01:05 +00:00
+https://helovesmath.com/calculator/time-calculator-3/ 0 2025-03-03 22:13 +00:00
+https://helovesmath.com/health-and-fitness-calculators/adjusted-body-weight-calculator-calculate-ajbw/ 0 2025-03-03 21:46 +00:00
+https://helovesmath.com/calculator/p-value-calculator/ 0 2025-03-03 04:18 +00:00
+https://helovesmath.com/calculator/percentage-calculator-2/ 0 2025-03-03 03:54 +00:00
+https://helovesmath.com/calculator/muzzle-velocity-calculator/ 0 2025-03-02 23:51 +00:00
+https://helovesmath.com/calculator/ballistic-coefficient-calculator/ 0 2025-03-02 21:22 +00:00
+https://helovesmath.com/calculator/momentum-calculator/ 0 2025-03-02 21:04 +00:00
+https://helovesmath.com/calculator/arrow-speed-calculator/ 0 2025-03-02 20:46 +00:00
+https://helovesmath.com/tools/multiplication-tables-with-times-tables-games/ 0 2025-03-02 20:26 +00:00
+https://helovesmath.com/news/ais-global-revolution-how-the-middle-east-is-leading-the-next-wave-of-transformation/ 1 2025-03-02 20:07 +00:00
+https://helovesmath.com/calculator/interactive-multiplication-table-generator/ 0 2025-02-27 01:39 +00:00
+https://helovesmath.com/study-notes/juvenile-idiopathic-arthritis/ 1 2025-02-26 20:43 +00:00
+https://helovesmath.com/study-notes/choriocarcinoma-everything-you-need-to-know/ 1 2025-02-26 00:08 +00:00
+https://helovesmath.com/study-notes/mesothelioma-everything-you-need-to-know/ 1 2025-02-26 00:03 +00:00
+https://helovesmath.com/calculator/payback-method-calculator/ 0 2025-02-25 23:17 +00:00
+https://helovesmath.com/study-notes/chronic-obstructive-pulmonary-disease-copd-a-comprehensive-guide/ 1 2025-02-25 21:50 +00:00
+https://helovesmath.com/study-notes/iga-nephropathy/ 1 2025-02-25 21:44 +00:00
+https://helovesmath.com/study-notes/heart-rhythm-disorders-when-the-heart-is-out-of-rhythm/ 1 2025-02-25 21:34 +00:00
+https://helovesmath.com/study-notes/polycystic-kidney-disease-an-in-depth-guide/ 1 2025-02-25 21:27 +00:00
+https://helovesmath.com/study-notes/pulmonary-high-blood-pressure/ 1 2025-02-25 21:19 +00:00
+https://helovesmath.com/study-notes/respiratory-embolism-pulmonary-embolism/ 1 2025-02-25 21:13 +00:00
+https://helovesmath.com/study-notes/pulmonary-hypertension-a-comprehensive-guide-to-symptoms-diagnosis-treatment-and-prevention/ 1 2025-02-25 21:02 +00:00
+https://helovesmath.com/study-notes/kidney-stones-a-overview-of-symptoms-diagnosis-treatment-and-prevention/ 1 2025-02-25 20:56 +00:00
+https://helovesmath.com/study-notes/sickle-cell-disease-a-guide-to-symptoms-diagnosis-treatment-and-support/ 1 2025-02-25 20:46 +00:00
+https://helovesmath.com/study-notes/ulcerative-colitis-symptoms-and-causes/ 1 2025-02-25 20:29 +00:00
+https://helovesmath.com/ap-precalculus/free%e2%80%90response-questions-frqs-ap-psychology/ 1 2025-02-25 00:51 +00:00
+https://helovesmath.com/ap-psychology/ap-psych-concept-application-ap-psychology-3/ 0 2025-02-22 01:50 +00:00
+https://helovesmath.com/ap-precalculus/ap-psych-concept-application/ 0 2025-02-22 01:43 +00:00
+https://helovesmath.com/ap-psychology/ap-psych-concept-application-ap-psychology-2/ 0 2025-02-22 01:35 +00:00
+https://helovesmath.com/ap-psychology/ap-psych-concept-application-ap-psychology/ 0 2025-02-22 01:29 +00:00
+https://helovesmath.com/news/best-website-builder-for-small-businesses-in-2025/ 1 2025-02-19 20:52 +00:00
+https://helovesmath.com/study-notes/sat-math-notes/ 0 2025-02-19 20:07 +00:00
+https://helovesmath.com/past-papers/ocr-a-level-physics-past-papers/ 0 2025-02-19 20:00 +00:00
+https://helovesmath.com/calculator/minimum-wage/ 1 2025-02-14 14:47 +00:00
+https://helovesmath.com/calculator/best-financial-advisors/ 1 2025-02-14 02:06 +00:00
+https://helovesmath.com/calculator/home-loan-comparison/ 1 2025-02-14 01:44 +00:00
+https://helovesmath.com/calculator/loan-calculator-3/ 0 2025-02-14 01:35 +00:00
+https://helovesmath.com/calculator/home-equity-loan-calculator-2/ 0 2025-02-14 01:28 +00:00
+https://helovesmath.com/calculator/auto-loan-calculator-3/ 0 2025-02-14 01:20 +00:00
+https://helovesmath.com/calculator/debt-consolidation-calculator/ 0 2025-02-14 01:13 +00:00
+https://helovesmath.com/calculator/roofing-calculator/ 0 2025-02-14 01:04 +00:00
+https://helovesmath.com/calculator/apr-calculator/ 0 2025-02-14 00:57 +00:00
+https://helovesmath.com/calculator/army-body-fat-calculator/ 1 2025-02-14 00:49 +00:00
+https://helovesmath.com/calculator/weight-watcher-points-calculator/ 1 2025-02-14 00:42 +00:00
+https://helovesmath.com/calculator/return-on-investment-roi-calculator-roi-calculator/ 1 2025-02-14 00:22 +00:00
+https://helovesmath.com/calculator/scientific-calculator-2/ 1 2025-02-14 00:12 +00:00
+https://helovesmath.com/calculator/gpa-calculator-4/ 1 2025-02-14 00:04 +00:00
+https://helovesmath.com/calculator/grade-calculator-3/ 1 2025-02-13 23:56 +00:00
+https://helovesmath.com/study-notes/the-ultimate-guide-to-personality-tests-mbti-enneagram-and-the-dark-side-of-human-nature/ 1 2025-02-11 03:35 +00:00
+https://helovesmath.com/news/roblox-the-digital-playground-revolutionizing-gaming-creativity-and-community/ 1 2025-02-11 03:22 +00:00
+https://helovesmath.com/news/alibabas-qwen2-5-vl-a-new-challenger-in-the-ai-arena/ 1 2025-02-11 03:13 +00:00
+https://helovesmath.com/news/rply-is-a-new-ai-assistant-that-responds-to-missed-texts/ 1 2025-02-11 03:05 +00:00
+https://helovesmath.com/news/deepseek-has-gone-viral-how-a-chinese-ai-lab-is-shaking-up-the-global-landscape/ 1 2025-02-11 02:56 +00:00
+https://helovesmath.com/news/deepseeks-r1-a-cautionary-tale-of-ai-jailbreaking-vulnerabilities/ 1 2025-02-11 02:50 +00:00
+https://helovesmath.com/news/what-does-is-ai-making-us-dumb-really-mean/ 1 2025-02-11 02:37 +00:00
+https://helovesmath.com/study-notes/applied-artificial-intelligence/ 1 2025-02-11 02:27 +00:00
+https://helovesmath.com/news/what-is-a-nvidia-keynote/ 1 2025-02-11 02:21 +00:00
+https://helovesmath.com/news/nvidia-rtx-4090-the-ultimate-guide-to-the-pinnacle-of-gpu-performance/ 1 2025-02-11 02:15 +00:00
+https://helovesmath.com/news/satta-king-a-comprehensive-guide-to-the-controversial-game-and-its-cultural-impact/ 1 2025-02-11 02:05 +00:00
+https://helovesmath.com/news/home-depot-the-ultimate-guide-to-americas-leading-home-improvement-giant/ 1 2025-02-11 01:58 +00:00
+https://helovesmath.com/study-notes/scale-ai-the-ultimate-guide-to-transforming-data-for-artificial-intelligence/ 1 2025-02-11 01:45 +00:00
+https://helovesmath.com/study-notes/nvidia-h100-the-ultimate-guide-to-the-next-generation-of-ai-and-hpc-acceleration/ 1 2025-02-11 01:36 +00:00
+https://helovesmath.com/study-notes/adding-fractions-and-mixed-number/ 0 2025-02-11 01:07 +00:00
+https://helovesmath.com/study-notes/adding-fractions/ 0 2025-02-11 00:57 +00:00
+https://helovesmath.com/study-notes/multiplying-fractions/ 0 2025-02-11 00:52 +00:00
+https://helovesmath.com/study-notes/equivalent-fractions-unlocking-the-mystery-of-fractional-equality/ 1 2025-02-11 00:46 +00:00
+https://helovesmath.com/news/zelle-app-the-ultimate-guide-to-instant-money-transfers-for-americans/ 1 2025-02-11 00:33 +00:00
+https://helovesmath.com/news/candy-crush-the-ultimate-guide-to-the-addictive-phenomenon-changing-mobile-gaming/ 1 2025-02-11 00:23 +00:00
+https://helovesmath.com/news/bumble-the-ultimate-guide-to-modern-dating-friendship-and-networking-for-americans/ 1 2025-02-11 00:12 +00:00
+https://helovesmath.com/news/cash-app-the-ultimate-guide-for-american-users/ 1 2025-02-10 23:37 +00:00
+https://helovesmath.com/news/mymetro-the-ultimate-guide-to-modern-metro-transit-solutions/ 1 2025-02-10 23:25 +00:00
+https://helovesmath.com/study-notes/citrix-workspace-the-ultimate-guide-for-modern-american-workplaces/ 1 2025-02-10 04:42 +00:00
+https://helovesmath.com/study-notes/revolut-business/ 1 2025-02-10 04:36 +00:00
+https://helovesmath.com/study-notes/android-studio-download/ 1 2025-02-10 04:28 +00:00
+https://helovesmath.com/study-notes/apkmody-the-ultimate-guide-to-android-apk-mods-and-modified-apps/ 1 2025-02-10 04:24 +00:00
+https://helovesmath.com/study-notes/google-play-store-console-developer/ 1 2025-02-10 04:15 +00:00
+https://helovesmath.com/study-notes/google-ads-manager/ 1 2025-02-10 04:07 +00:00
+https://helovesmath.com/study-notes/translate-unlocking-the-world-through-language/ 1 2025-02-10 04:00 +00:00
+https://helovesmath.com/study-notes/whatsapp-web-the-ultimate-guide-for-american-users/ 1 2025-02-10 03:52 +00:00
+https://helovesmath.com/study-notes/myvegas-the-ultimate-guide-to-social-casino-gaming-and-rewards/ 1 2025-02-10 03:43 +00:00
+https://helovesmath.com/study-notes/selling-on-facebook-marketplace/ 1 2025-02-10 03:31 +00:00
+https://helovesmath.com/study-notes/facebook-business-manager/ 1 2025-02-10 03:25 +00:00
+https://helovesmath.com/study-notes/youtube-advertising/ 1 2025-02-10 03:17 +00:00
+https://helovesmath.com/worksheets/the-multiplication-table-2/ 1 2025-02-10 02:52 +00:00
+https://helovesmath.com/study-notes/formulas/ 1 2025-02-09 22:08 +00:00
+https://helovesmath.com/insurance/renters-insurance-everything-you-need-to-know/ 1 2025-02-08 22:07 +00:00
+https://helovesmath.com/insurance/health-insurance-everything-you-need-to-know/ 1 2025-02-08 21:41 +00:00
+https://helovesmath.com/insurance/auto-insurance-everything-you-need-to-know/ 1 2025-02-08 21:34 +00:00
+https://helovesmath.com/insurance/insurance-quotes-everything-you-need-to-know/ 1 2025-02-08 21:23 +00:00
+https://helovesmath.com/insurance/life-insurance-everything-you-need-to-know/ 1 2025-02-08 21:14 +00:00
+https://helovesmath.com/insurance/life-insurance-corporation-everything-you-need-to-know/ 1 2025-02-08 21:09 +00:00
+https://helovesmath.com/insurance/progressive-insurance-company-everything-you-need-to-know/ 1 2025-02-08 21:04 +00:00
+https://helovesmath.com/insurance/cheap-car-insurance-everything-you-need-to-know/ 1 2025-02-08 20:57 +00:00
+https://helovesmath.com/insurance/travel-insurance-everything-you-need-to-know/ 1 2025-02-08 20:51 +00:00
+https://helovesmath.com/insurance/car-insurance-quotes-everything-you-need-to-know/ 1 2025-02-08 20:45 +00:00
+https://helovesmath.com/insurance/car-insurance-everything-you-need-to-know-for-a-safer-ride/ 1 2025-02-08 20:40 +00:00
+https://helovesmath.com/guides/how-to-meditate/ 1 2025-02-08 00:46 +00:00
+https://helovesmath.com/guides/how-to-find-a-job-a-guide-to-your-job-search-journey/ 1 2025-02-08 00:36 +00:00
+https://helovesmath.com/calculator/salary-paycheck-calculator/ 1 2025-02-08 00:17 +00:00
+https://helovesmath.com/study-notes/what-is-a-pronoun-a-comprehensive-guide-to-pronouns-their-types-and-usage-in-english-grammar/ 1 2025-02-08 00:00 +00:00
+https://helovesmath.com/study-notes/what-is-a-karen-understanding-the-meme-its-origins-and-its-cultural-impact/ 1 2025-02-07 23:55 +00:00
+https://helovesmath.com/study-notes/guide-to-iso-what-it-is-what-it-means-and-why-it-matters/ 1 2025-02-07 23:51 +00:00
+https://helovesmath.com/study-notes/the-effect-of-the-greenhouse-effect-causes-impacts-and-global-warming-explained/ 1 2025-02-07 23:38 +00:00
+https://helovesmath.com/calculator/lean-body-mass-calculator/ 0 2025-02-06 23:14 +00:00
+https://helovesmath.com/calculator/weight-watchers-points-calculator/ 0 2025-02-06 23:08 +00:00
+https://helovesmath.com/calculator/roi-calculator/ 0 2025-02-06 23:00 +00:00
+https://helovesmath.com/news/what-time-is-the-super-bowl-2025/ 1 2025-02-06 22:52 +00:00
+https://helovesmath.com/calculator/amortization-calculator/ 0 2025-02-06 22:40 +00:00
+https://helovesmath.com/study-notes/divide-whole-numbers/ 0 2025-02-06 22:13 +00:00
+https://helovesmath.com/study-notes/add-and-subtract/ 0 2025-02-06 21:38 +00:00
+https://helovesmath.com/study-notes/ielts-test-information-faq/ 1 2025-02-06 21:06 +00:00
+https://helovesmath.com/chatgpt/guide-to-chatgpt-and-openais-chatbot-ecosystem/ 2 2025-02-06 09:48 +00:00
+https://helovesmath.com/news/7-passive-income-ideas-to-boost-your-salary-in-2025/ 1 2025-02-06 07:41 +00:00
+https://helovesmath.com/calculator/time-duration-calculator/ 0 2025-02-05 01:08 +00:00
+https://helovesmath.com/ap-psychology/the-neuron-and-neural-firing/ 0 2025-02-05 00:03 +00:00
+https://helovesmath.com/ap-psychology/overview-of-the-nervous-system-ap-psychology/ 0 2025-02-04 23:32 +00:00
+https://helovesmath.com/ap-psychology/interaction-of-heredity-and-environment-ap-psychology/ 0 2025-02-04 23:24 +00:00
+https://helovesmath.com/guides/math-has-its-own-language-how-can-students-learn-to-speak-it/ 1 2025-02-04 22:44 +00:00
+https://helovesmath.com/news/why-trumps-plan-to-kill-the-education-department-may-fail-department-of-education/ 1 2025-02-04 22:24 +00:00
+https://helovesmath.com/news/track-my-refund-2025-tax-refund-date-estimator-when-you-will-get-your-refund-wheres-my-tax-refund/ 1 2025-02-04 22:00 +00:00
+https://helovesmath.com/news/why-palantir-could-be-the-next-oracle-or-salesforce/ 1 2025-02-04 21:50 +00:00
+https://helovesmath.com/news/usaid-what-it-is-what-it-does-and-why-its-future-is-at-a-crossroads/ 1 2025-02-04 21:43 +00:00
+https://helovesmath.com/news/tariffs-and-the-global-economic-the-world-has-changed-since-trumps-first-trade-war/ 1 2025-02-04 21:34 +00:00
+https://helovesmath.com/news/did-the-groundhog-see-his-shadow/ 1 2025-02-04 21:27 +00:00
+https://helovesmath.com/guides/i-used-7-prompts-to-test-the-problem-solving-and-reasoning-capabilities-of-chatgpts-free-tier-o3-mini-model-heres-what-happened/ 1 2025-02-04 21:19 +00:00
+https://helovesmath.com/news/exploring-the-night-sky-moon-planets-and-bright-stars/ 5 2025-02-04 20:59 +00:00
+https://helovesmath.com/tools/practice-addition-sums/ 0 2025-02-04 01:02 +00:00
+https://helovesmath.com/multiplication-table/4-times-table-with-games/ 0 2025-02-04 00:43 +00:00
+https://helovesmath.com/multiplication-table/8-times-table-with-games/ 0 2025-02-04 00:42 +00:00
+https://helovesmath.com/multiplication-table/3-times-table-with-games/ 0 2025-02-04 00:42 +00:00
+https://helovesmath.com/multiplication-table/2-times-table-with-games/ 0 2025-02-04 00:41 +00:00
+https://helovesmath.com/multiplication-table/1-times-table-with-games/ 0 2025-02-04 00:41 +00:00
+https://helovesmath.com/multiplication-table/multiplication-chart-1-100/ 1 2025-02-04 00:40 +00:00
+https://helovesmath.com/multiplication-table/7-times-table-with-games/ 0 2025-02-04 00:32 +00:00
+https://helovesmath.com/multiplication-table/6-times-table-with-games/ 0 2025-02-04 00:24 +00:00
+https://helovesmath.com/multiplication-table/5-times-table-with-games/ 0 2025-02-04 00:17 +00:00
+https://helovesmath.com/calculator/bra-size-calculator/ 1 2025-02-03 03:32 +00:00
+https://helovesmath.com/calculator/trigonometric-calculator/ 1 2025-02-03 01:41 +00:00
+https://helovesmath.com/calculator/fractions-calculator/ 1 2025-02-03 01:38 +00:00
+https://helovesmath.com/calculator/how-to-calculate-your-age/ 1 2025-02-03 01:33 +00:00
+https://helovesmath.com/calculator/calculate-days/ 1 2025-02-03 01:30 +00:00
+https://helovesmath.com/calculator/percentage-calculator/ 1 2025-02-03 01:17 +00:00
+https://helovesmath.com/calculator/scientific-calculator/ 1 2025-02-03 01:12 +00:00
+https://helovesmath.com/calculator/sip-calculator/ 1 2025-02-03 01:08 +00:00
+https://helovesmath.com/calculator/equity-loan-calculator/ 1 2025-02-03 00:12 +00:00
+https://helovesmath.com/calculator/401k-calculator/ 1 2025-02-03 00:08 +00:00
+https://helovesmath.com/calculator/compound-interest-calculator/ 1 2025-02-03 00:00 +00:00
+https://helovesmath.com/calculator/macro-calculator/ 1 2025-02-02 23:44 +00:00
+https://helovesmath.com/calculator/heloc-payment-calculator/ 1 2025-02-02 23:40 +00:00
+https://helovesmath.com/calculator/mutual-fund-calculator/ 1 2025-02-02 23:33 +00:00
+https://helovesmath.com/calculator/borrowing-power-calculator/ 1 2025-02-02 23:30 +00:00
+https://helovesmath.com/calculator/payroll-calculator/ 1 2025-02-02 23:25 +00:00
+https://helovesmath.com/calculator/concrete-calculator/ 1 2025-02-02 23:21 +00:00
+https://helovesmath.com/calculator/investment-calculator/ 1 2025-02-02 22:56 +00:00
+https://helovesmath.com/calculator/roth-ira-calculator/ 1 2025-02-02 22:52 +00:00
+https://helovesmath.com/calculator/calorie-deficit-calculator/ 1 2025-02-02 22:49 +00:00
+https://helovesmath.com/calculator/business-loan-calculator/ 1 2025-02-02 22:45 +00:00
+https://helovesmath.com/calculator/cash-out-refinance-calculator/ 1 2025-02-02 22:40 +00:00
+https://helovesmath.com/calculator/tax-calculator/ 1 2025-02-02 22:35 +00:00
+https://helovesmath.com/calculator/cd-calculator/ 1 2025-02-02 22:30 +00:00
+https://helovesmath.com/calculator/refinance-calculator/ 1 2025-02-02 22:13 +00:00
+https://helovesmath.com/calculator/retirement-calculator/ 1 2025-02-02 22:07 +00:00
+https://helovesmath.com/calculator/bmi-calculator-2/ 1 2025-02-02 21:51 +00:00
+https://helovesmath.com/calculator/personal-loan-calculator/ 1 2025-02-02 21:44 +00:00
+https://helovesmath.com/calculator/car-payment-calculator/ 1 2025-02-02 21:40 +00:00
+https://helovesmath.com/calculator/va-loan-calculator/ 1 2025-02-02 21:36 +00:00
+https://helovesmath.com/calculator/loan-calculator-2/ 1 2025-02-02 15:27 +00:00
+https://helovesmath.com/calculator/reverse-mortgage-calculator/ 1 2025-02-02 15:20 +00:00
+https://helovesmath.com/calculator/home-equity-loan-calculator/ 1 2025-02-02 15:11 +00:00
+https://helovesmath.com/calculator/mortgage-calculator/ 0 2025-01-31 23:11 +00:00
+https://helovesmath.com/calculator/hyperbola-calculator/ 0 2025-01-31 22:57 +00:00
+https://helovesmath.com/calculator/auto-loan-payment-calculator/ 1 2025-01-31 22:49 +00:00
+https://helovesmath.com/calculator/gross-to-net-calculator/ 1 2025-01-31 22:36 +00:00
+https://helovesmath.com/calculator/mechanical-calculator/ 1 2025-01-31 22:31 +00:00
+https://helovesmath.com/calculator/compound-interest-calculator-daily-monthly-yearly-compounding/ 1 2025-01-31 00:29 +00:00
+https://helovesmath.com/calculator/gpa-calculator-2/ 1 2025-01-31 00:04 +00:00
+https://helovesmath.com/guides/the-best-online-learning-platforms-for-business-in-2025/ 2 2025-01-30 23:53 +00:00
+https://helovesmath.com/news/exploration-of-chatgpt-and-its-ai-chatbot-ecosystem/ 3 2025-01-30 23:35 +00:00
+https://helovesmath.com/news/deepseek-what-is-deepseek/ 2 2025-01-30 23:04 +00:00
+https://helovesmath.com/past-papers/maths-o-level-igcse-past-papers/ 0 2025-01-26 19:28 +00:00
+https://helovesmath.com/homework-resources/corporation-reasonable-salary-tax-optimization-strategies/ 1 2025-01-23 23:44 +00:00
+https://helovesmath.com/homework-resources/age-calculator-check-how-old-you-are/ 1 2025-01-23 10:10 +00:00
+https://helovesmath.com/homework-resources/guide-to-multiplication-tables/ 1 2025-01-23 07:44 +00:00
+https://helovesmath.com/homework-resources/best-way-to-learn-multiplication-tables/ 1 2025-01-23 07:09 +00:00
+https://helovesmath.com/calculator/dbm-to-mw-conversion/ 1 2024-12-07 17:13 +00:00
+https://helovesmath.com/calculator/dbm-converter/ 1 2024-12-07 16:42 +00:00
+https://helovesmath.com/calculator/btu-hr-to-refrigeration-tons-conversion/ 1 2024-12-07 15:58 +00:00
+https://helovesmath.com/calculator/temperature-conversion-calculators-for-celsius-fahrenheit-etc/ 1 2024-12-06 00:09 +00:00
+https://helovesmath.com/calculator/centimeters-to-inches-converter/ 1 2024-12-05 23:48 +00:00
+https://helovesmath.com/projects/100-electrical-and-electronic-components-symbols/ 1 2024-12-05 22:20 +00:00
+https://helovesmath.com/projects/100-embedded-systems-projects-for-engineering-students/ 1 2024-12-05 22:06 +00:00
+https://helovesmath.com/projects/200-best-electronics-mini-projects-circuits-working-process-code/ 1 2024-12-05 21:56 +00:00
+https://helovesmath.com/projects/200-electronics-projects-for-engineering-students/ 1 2024-12-05 21:53 +00:00
+https://helovesmath.com/news/why-iphone-screen-is-black-fix-black-screen-of-death/ 1 2024-12-05 21:29 +00:00
+https://helovesmath.com/mathematics-0580/cambridge-igcse-mathematics-0580-best-exam-help/ 0 2024-12-05 21:22 +00:00
+https://helovesmath.com/news/fix-megapersonal-error-701-fast-easy-steps-usa/ 0 2024-12-05 20:47 +00:00
+https://helovesmath.com/math/algebraic-geometry/ 0 2024-12-04 03:37 +00:00
+https://helovesmath.com/sat/math-workbooks-free-pdf-printables/ 0 2024-12-04 03:31 +00:00
+https://helovesmath.com/worksheets/math-worksheets-free-pdf-printables/ 0 2024-12-04 03:17 +00:00
+https://helovesmath.com/sat/sat-math-micro-lesson-proportion-control/ 0 2024-12-04 03:12 +00:00
+https://helovesmath.com/sat/plugging-in-random-values-on-the-sat-isnt-doing-math-and-you-should-stop-it/ 0 2024-12-04 03:10 +00:00
+https://helovesmath.com/sat/sat-math-micro-lesson-why-radians-rule/ 0 2024-12-04 03:07 +00:00
+https://helovesmath.com/sat/sat-math-micro-lesson-im-going-to-send-you-to-the-principal-square-root/ 0 2024-12-04 03:04 +00:00
+https://helovesmath.com/resources/mathematical-writings/ 0 2024-12-04 02:51 +00:00
+https://helovesmath.com/ib/the-benefits-of-the-international-baccalaureate-career-related-programme/ 1 2024-12-03 18:58 +00:00
+https://helovesmath.com/worksheets/2d-and-3d-shapes/ 0 2024-11-28 01:06 +00:00
+https://helovesmath.com/worksheets/primary-resources-maths-measures-shape-space-measures/ 0 2024-11-28 00:53 +00:00
+https://helovesmath.com/study-notes/primary-resources-maths-measures-shape-space-2-d-and-3-d-shape/ 1 2024-11-28 00:49 +00:00
+https://helovesmath.com/past-papers/cie-pre-u-maths-past-papers/ 0 2024-11-28 00:11 +00:00
+https://helovesmath.com/past-papers/cambridge-o-level-maths-past-papers/ 0 2024-11-28 00:08 +00:00
+https://helovesmath.com/past-papers/sqa-national-5-maths-past-papers/ 0 2024-11-28 00:06 +00:00
+https://helovesmath.com/past-papers/sqa-national-5-applications-of-mathematics-past-papers/ 0 2024-11-28 00:04 +00:00
+https://helovesmath.com/past-papers/ocr-level-3-core-maths-b-mei-past-papers/ 0 2024-11-28 00:00 +00:00
+https://helovesmath.com/past-papers/ocr-level-3-core-maths-a-mei-past-papers/ 0 2024-11-27 23:57 +00:00
+https://helovesmath.com/past-papers/edexcel-level-3-mathematics-in-context-core-maths-past-papers/ 0 2024-11-27 23:55 +00:00
+https://helovesmath.com/past-papers/aqa-level-3-mathematical-studies-core-maths-past-papers-4/ 0 2024-11-27 23:51 +00:00
+https://helovesmath.com/past-papers/aqa-level-3-mathematical-studies-core-maths-past-papers-3/ 0 2024-11-27 23:49 +00:00
+https://helovesmath.com/past-papers/aqa-level-3-mathematical-studies-core-maths-past-papers-2/ 0 2024-11-27 23:46 +00:00
+https://helovesmath.com/past-papers/aqa-level-3-mathematical-studies-core-maths-past-papers/ 0 2024-11-27 23:43 +00:00
+https://helovesmath.com/past-papers/oxford-aqa-international-as-maths-past-papers/ 0 2024-11-25 10:01 +00:00
+https://helovesmath.com/past-papers/edexcel-international-as-maths-statistics-1-past-papers/ 0 2024-11-25 09:58 +00:00
+https://helovesmath.com/past-papers/edexcel-international-as-maths-pure-2-past-papers/ 0 2024-11-25 09:57 +00:00
+https://helovesmath.com/past-papers/edexcel-international-as-maths-pure-1-past-papers/ 0 2024-11-25 09:52 +00:00
+https://helovesmath.com/past-papers/edexcel-international-as-maths-mechanics-1-past-papers/ 0 2024-11-25 09:12 +00:00
+https://helovesmath.com/past-papers/edexcel-international-as-maths-decision-1-past-papers/ 0 2024-11-25 09:11 +00:00
+https://helovesmath.com/past-papers/oxford-aqa-international-a-level-maths-past-papers/ 0 2024-11-25 09:09 +00:00
+https://helovesmath.com/past-papers/edexcel-international-a-level-maths-statistics-2-past-papers/ 0 2024-11-25 09:06 +00:00
+https://helovesmath.com/past-papers/edexcel-international-a-level-maths-statistics-1-past-papers/ 0 2024-11-25 09:05 +00:00
+https://helovesmath.com/past-papers/edexcel-international-a-level-maths-pure-4-past-papers/ 0 2024-11-25 09:03 +00:00
+https://helovesmath.com/past-papers/edexcel-international-a-level-maths-pure-3-past-papers/ 0 2024-11-25 09:01 +00:00
+https://helovesmath.com/past-papers/edexcel-international-a-level-maths-pure-2-past-papers/ 0 2024-11-25 09:00 +00:00
+https://helovesmath.com/past-papers/edexcel-international-a-level-maths-pure-1-past-papers/ 0 2024-11-25 08:58 +00:00
+https://helovesmath.com/past-papers/edexcel-international-a-level-maths-mechanics-2-past-papers/ 0 2024-11-25 08:56 +00:00
+https://helovesmath.com/past-papers/edexcel-international-a-level-maths-mechanics-1-past-papers/ 0 2024-11-25 08:54 +00:00
+https://helovesmath.com/past-papers/edexcel-international-a-level-maths-decision-1-past-papers/ 0 2024-11-25 08:52 +00:00
+https://helovesmath.com/past-papers/oxford-aqa-igcse-maths-past-papers/ 0 2024-11-25 08:51 +00:00
+https://helovesmath.com/past-papers/edexcel-igcse-maths-b-past-papers/ 0 2024-11-25 08:48 +00:00
+https://helovesmath.com/past-papers/edexcel-igcse-maths-a-modular-past-papers-2/ 0 2024-11-25 08:47 +00:00
+https://helovesmath.com/past-papers/edexcel-igcse-maths-a-modular-past-papers/ 0 2024-11-25 08:45 +00:00
+https://helovesmath.com/past-papers/edexcel-igcse-maths-past-papers-2/ 0 2024-11-25 08:43 +00:00
+https://helovesmath.com/past-papers/cambridge-cie-igcse-international-maths-past-papers-4/ 0 2024-11-25 08:41 +00:00
+https://helovesmath.com/past-papers/cambridge-cie-igcse-international-maths-past-papers-3/ 0 2024-11-25 08:39 +00:00
+https://helovesmath.com/past-papers/cie-igcse-maths-extended-past-papers-2/ 0 2024-11-25 08:37 +00:00
+https://helovesmath.com/past-papers/cie-igcse-maths-core-past-papers-2/ 0 2024-11-25 08:35 +00:00
+https://helovesmath.com/past-papers/sqa-higher-maths-past-papers-2/ 0 2024-11-25 08:33 +00:00
+https://helovesmath.com/past-papers/sqa-higher-applications-of-mathematics-past-papers-2/ 0 2024-11-25 08:31 +00:00
+https://helovesmath.com/past-papers/wjec-gcse-maths-numeracy-past-papers-2/ 0 2024-11-25 08:29 +00:00
+https://helovesmath.com/past-papers/wjec-gcse-maths-past-papers-2/ 0 2024-11-25 08:24 +00:00
+https://helovesmath.com/past-papers/wjec-eduqas-gcse-maths-past-papers-2/ 0 2024-11-25 08:22 +00:00
+https://helovesmath.com/past-papers/ocr-gcse-maths-past-papers-3/ 0 2024-11-25 08:20 +00:00
+https://helovesmath.com/past-papers/edexcel-gcse-maths-past-papers-4/ 0 2024-11-25 08:16 +00:00
+https://helovesmath.com/resources/areas-just-times/ 0 2024-11-21 21:48 +00:00
+https://helovesmath.com/news/the-parents-guide-to-boarding-schools/ 1 2024-11-21 21:30 +00:00
+https://helovesmath.com/study-notes/properties-of-3d-shapes/ 1 2024-11-21 20:42 +00:00
+https://helovesmath.com/news/exploring-the-scholarly-contributions-of-anne-watson/ 1 2024-11-21 20:12 +00:00
+https://helovesmath.com/news/2025-colleges-with-the-best-student-life-in-america/ 1 2024-11-20 22:45 +00:00
+https://helovesmath.com/news/2025-best-colleges-for-math-in-america/ 1 2024-11-20 22:23 +00:00
+https://helovesmath.com/news/how-chatgpt-in-math-learning/ 1 2024-11-20 22:03 +00:00
+https://helovesmath.com/sat/boston-college/ 1 2024-11-20 12:15 +00:00
+https://helovesmath.com/sat/lincoln-tech/ 1 2024-11-19 22:22 +00:00
+https://helovesmath.com/sat/2025-top-public-colleges-universities-us-news-rankings/ 1 2024-11-19 22:06 +00:00
+https://helovesmath.com/calculator/gpa-calculator-calculate-track-and-save-your-gpa/ 1 2024-11-17 21:26 +00:00
+https://helovesmath.com/calculator/auto-loan-calculator/ 0 2024-11-17 18:58 +00:00
+https://helovesmath.com/calculator/time-calculator/ 0 2024-11-17 18:43 +00:00
+https://helovesmath.com/past-papers/edexcel-igcse-maths-past-papers/ 0 2024-11-16 22:52 +00:00
+https://helovesmath.com/past-papers/cambridge-cie-igcse-international-maths-past-papers-2/ 0 2024-11-16 22:47 +00:00
+https://helovesmath.com/past-papers/cambridge-cie-igcse-international-maths-past-papers/ 0 2024-11-16 22:46 +00:00
+https://helovesmath.com/past-papers/cie-igcse-maths-extended-past-papers/ 0 2024-11-16 22:40 +00:00
+https://helovesmath.com/past-papers/cie-igcse-maths-core-past-papers/ 0 2024-11-16 22:35 +00:00
+https://helovesmath.com/past-papers/sqa-higher-maths-past-papers/ 0 2024-11-16 22:33 +00:00
+https://helovesmath.com/past-papers/sqa-higher-applications-of-mathematics-past-papers/ 0 2024-11-16 22:27 +00:00
+https://helovesmath.com/past-papers/wjec-gcse-maths-numeracy-past-papers/ 0 2024-11-16 22:18 +00:00
+https://helovesmath.com/past-papers/wjec-gcse-maths-past-papers/ 0 2024-11-16 22:16 +00:00
+https://helovesmath.com/past-papers/wjec-eduqas-gcse-maths-past-papers/ 0 2024-11-16 22:13 +00:00
+https://helovesmath.com/past-papers/ocr-gcse-maths-past-papers-2/ 0 2024-11-16 22:09 +00:00
+https://helovesmath.com/past-papers/edexcel-gcse-maths-past-papers-3/ 0 2024-11-16 22:07 +00:00
+https://helovesmath.com/past-papers/edexcel-gcse-maths-past-papers-2/ 0 2024-11-16 22:03 +00:00
+https://helovesmath.com/past-papers/aqa-gcse-maths-past-papers-2/ 0 2024-11-16 21:59 +00:00
+https://helovesmath.com/past-papers/sqa-advanced-higher-maths-past-papers/ 0 2024-11-16 21:57 +00:00
+https://helovesmath.com/past-papers/wjec-as-maths-past-papers/ 0 2024-11-16 21:55 +00:00
+https://helovesmath.com/past-papers/ocr-as-maths-statistics-past-papers/ 0 2024-11-16 21:53 +00:00
+https://helovesmath.com/past-papers/ocr-as-maths-pure-past-papers/ 0 2024-11-16 21:51 +00:00
+https://helovesmath.com/past-papers/ocr-as-maths-mechanics-past-papers/ 0 2024-11-16 21:48 +00:00
+https://helovesmath.com/past-papers/ocr-as-maths-b-mei-past-papers/ 0 2024-11-16 21:46 +00:00
+https://helovesmath.com/past-papers/edexcel-as-maths-statistics-past-papers/ 0 2024-11-16 21:42 +00:00
+https://helovesmath.com/past-papers/edexcel-as-maths-pure-past-papers/ 0 2024-11-16 21:40 +00:00
+https://helovesmath.com/past-papers/edexcel-as-maths-mechanics-past-papers/ 0 2024-11-16 21:38 +00:00
+https://helovesmath.com/past-papers/cie-as-maths-pure-2-past-papers/ 0 2024-11-16 21:35 +00:00
+https://helovesmath.com/past-papers/cie-as-maths-pure-1-past-papers/ 0 2024-11-16 21:33 +00:00
+https://helovesmath.com/past-papers/cie-as-maths-probability-statistics-1-past-papers/ 0 2024-11-16 21:30 +00:00
+https://helovesmath.com/past-papers/cie-as-maths-mechanics-past-papers/ 0 2024-11-16 21:28 +00:00
+https://helovesmath.com/past-papers/aqa-as-maths-statistics-past-papers/ 0 2024-11-16 21:26 +00:00
+https://helovesmath.com/past-papers/aqa-as-maths-pure-past-papers/ 0 2024-11-16 21:24 +00:00
+https://helovesmath.com/past-papers/aqa-as-maths-mechanics-past-papers/ 0 2024-11-16 21:21 +00:00
+https://helovesmath.com/past-papers/college-board-ap-precalculus-past-exams/ 0 2024-11-16 21:18 +00:00
+https://helovesmath.com/past-papers/college-board-ap-calculus-bc-past-exams/ 0 2024-11-16 21:15 +00:00
+https://helovesmath.com/past-papers/college-board-ap-calculus-ab-past-exams/ 0 2024-11-16 21:13 +00:00
+https://helovesmath.com/past-papers/wjec-a-level-maths-past-papers/ 0 2024-11-16 21:10 +00:00
+https://helovesmath.com/past-papers/ocr-a-level-maths-statistics-past-papers/ 0 2024-11-16 21:08 +00:00
+https://helovesmath.com/past-papers/ocr-a-level-maths-pure-past-papers/ 0 2024-11-16 21:07 +00:00
+https://helovesmath.com/past-papers/ocr-a-level-maths-b-mei-past-papers/ 0 2024-11-16 21:02 +00:00
+https://helovesmath.com/past-papers/edexcel-a-level-maths-statistics-past-papers/ 0 2024-11-16 20:59 +00:00
+https://helovesmath.com/past-papers/edexcel-a-level-maths-pure-past-papers/ 0 2024-11-16 20:58 +00:00
+https://helovesmath.com/past-papers/edexcel-a-level-maths-mechanics-past-papers/ 0 2024-11-16 20:56 +00:00
+https://helovesmath.com/past-papers/cie-a-level-maths-pure-3-past-papers/ 0 2024-11-16 20:53 +00:00
+https://helovesmath.com/past-papers/cie-a-level-maths-pure-1-past-papers/ 0 2024-11-16 20:51 +00:00
+https://helovesmath.com/past-papers/cie-a-level-maths-probability-statistics-2-past-papers/ 0 2024-11-16 20:47 +00:00
+https://helovesmath.com/past-papers/cie-a-level-maths-probability-statistics-1-past-papers/ 0 2024-11-16 20:44 +00:00
+https://helovesmath.com/past-papers/aqa-a-level-maths-statistics-past-papers/ 0 2024-11-16 20:40 +00:00
+https://helovesmath.com/past-papers/aqa-a-level-maths-pure-past-papers/ 0 2024-11-16 20:36 +00:00
+https://helovesmath.com/past-papers/aqa-a-level-maths-mechanics-past-papers/ 0 2024-11-16 20:34 +00:00
+https://helovesmath.com/calculus-ii/calculus-ii-worksheets/ 0 2024-11-15 22:53 +00:00
+https://helovesmath.com/college-algebra/college-algebra/ 0 2024-11-15 22:48 +00:00
+https://helovesmath.com/study-notes/free-math-worksheets-games/ 0 2024-11-15 22:40 +00:00
+https://helovesmath.com/ib/ib-physics-revision-notes-for-ib-physics/ 2 2024-11-15 20:55 +00:00
+https://helovesmath.com/calculator/tube-volume-calculator/ 0 2024-11-15 12:07 +00:00
+https://helovesmath.com/calculator/capsule-volume-calculator/ 0 2024-11-15 11:25 +00:00
+https://helovesmath.com/calculator/cylinder-volume-calculator/ 0 2024-11-15 11:05 +00:00
+https://helovesmath.com/calculator/sphere-volume-calculator/ 0 2024-11-15 10:52 +00:00
+https://helovesmath.com/calculator/cube-volume-calculator/ 0 2024-11-15 08:02 +00:00
+https://helovesmath.com/worksheets/free-printable-math-worksheets-for-calculus/ 0 2024-11-14 21:35 +00:00
+https://helovesmath.com/worksheets/free-printable-math-worksheets-for-algebra-2/ 0 2024-11-14 21:30 +00:00
+https://helovesmath.com/worksheets/free-printable-math-worksheets-for-geometry/ 0 2024-11-14 21:21 +00:00
+https://helovesmath.com/worksheets/free-printable-math-worksheets-for-algebra-1/ 0 2024-11-14 21:13 +00:00
+https://helovesmath.com/worksheets/free-printable-math-worksheets-for-pre-algebra/ 0 2024-11-14 21:11 +00:00
+https://helovesmath.com/worksheets/free-printable-math-worksheets-for-precalculus/ 0 2024-11-14 21:07 +00:00
+https://helovesmath.com/math/multiplication-chart/ 0 2024-11-14 08:44 +00:00
+https://helovesmath.com/math-game/the-multiplication-table-game-for-kids/ 1 2024-11-14 08:24 +00:00
+https://helovesmath.com/calculator/weight-converter/ 1 2024-11-14 01:15 +00:00
+https://helovesmath.com/calculator/length-converter/ 1 2024-11-14 00:55 +00:00
+https://helovesmath.com/calculator/final-grade-calculator/ 1 2024-11-14 00:35 +00:00
+https://helovesmath.com/calculator/grade-calculator/ 1 2024-11-14 00:24 +00:00
+https://helovesmath.com/gcse-past-papers/gcse-maths-resources/ 0 2024-11-14 00:08 +00:00
+https://helovesmath.com/calculator/2d-distance-calculator/ 0 2024-11-08 13:01 +00:00
+https://helovesmath.com/calculator/circle-circumference-calculator/ 0 2024-11-08 12:17 +00:00
+https://helovesmath.com/homework-resources/square-area-calculator/ 0 2024-11-08 11:52 +00:00
+https://helovesmath.com/homework-resources/rectangle-area-calculator/ 0 2024-11-08 11:51 +00:00
+https://helovesmath.com/homework-resources/trapezoid-area-calculator/ 0 2024-11-08 11:50 +00:00
+https://helovesmath.com/homework-resources/parallelogram-area-calculator/ 0 2024-11-08 11:49 +00:00
+https://helovesmath.com/homework-resources/circle-area-calculator/ 0 2024-11-08 11:47 +00:00
+https://helovesmath.com/calculator/triangle-area-calculator/ 0 2024-11-08 11:45 +00:00
+https://helovesmath.com/homework-resources/ellipse-area-calculator/ 0 2024-11-08 11:43 +00:00
+https://helovesmath.com/further-mathematics-7366/further-maths-worksheets/ 0 2024-11-01 17:55 +00:00
+https://helovesmath.com/math-resources/free-math-worksheets/ 1 2024-11-01 17:39 +00:00
+https://helovesmath.com/math-resources/math-worksheets/ 0 2024-10-28 16:26 +00:00
+https://helovesmath.com/math-resources/a-level-math/ 0 2024-10-28 16:23 +00:00
+https://helovesmath.com/math-resources/level-2-further-mathematics/ 0 2024-10-28 16:19 +00:00
+https://helovesmath.com/mathematics/revision-number-algebra-geometry-statistics-and-probability/ 0 2024-10-28 16:15 +00:00
+https://helovesmath.com/math-resources/probability-worksheets/ 0 2024-10-28 16:10 +00:00
+https://helovesmath.com/math/statistics-worksheets/ 0 2024-10-28 16:05 +00:00
+https://helovesmath.com/math-resources/geometry-worksheets/ 0 2024-10-28 16:01 +00:00
+https://helovesmath.com/math-resources/algebra-worksheets/ 0 2024-10-28 15:58 +00:00
+https://helovesmath.com/math-resources/number-worksheets/ 0 2024-10-28 15:54 +00:00
+https://helovesmath.com/finance/credit-cards/ 1 2024-10-26 08:15 +00:00
+https://helovesmath.com/finance/personal-loans-rates/ 1 2024-10-26 02:40 +00:00
+https://helovesmath.com/finance/mortgage-rates/ 1 2024-10-26 02:27 +00:00
+https://helovesmath.com/sat/complete-sat-resources/ 1 2024-10-25 16:32 +00:00
+https://helovesmath.com/insurance/multiplication-times-table-worksheets-generator/ 1 2024-10-25 11:57 +00:00
+https://helovesmath.com/insurance/home-insurance/ 1 2024-10-25 11:23 +00:00
+https://helovesmath.com/insurance/business-insurance/ 1 2024-10-25 11:18 +00:00
+https://helovesmath.com/insurance/how-much-is-car-insurance/ 1 2024-10-25 11:11 +00:00
+https://helovesmath.com/insurance/life-insurance/ 1 2024-10-25 11:07 +00:00
+https://helovesmath.com/insurance/health-insurance/ 1 2024-10-25 11:02 +00:00
+https://helovesmath.com/insurance/progressive-insurance/ 1 2024-10-25 10:56 +00:00
+https://helovesmath.com/insurance/car-insurance/ 1 2024-10-25 10:56 +00:00
+https://helovesmath.com/news/does-computer-science-require-math/ 1 2024-10-18 11:25 +00:00
+https://helovesmath.com/chatgpt/does-chat-gpt-plagiarize/ 1 2024-10-18 11:17 +00:00
+https://helovesmath.com/chatgpt/can-turnitin-detect-chat-gpt/ 1 2024-10-18 11:11 +00:00
+https://helovesmath.com/chatgpt/how-to-use-chat-gpt/ 1 2024-10-18 10:51 +00:00
+https://helovesmath.com/chatgpt/what-is-chat-gpt/ 1 2024-10-18 10:48 +00:00
+https://helovesmath.com/study-notes/the-ib-diploma/ 1 2024-10-18 10:01 +00:00
+https://helovesmath.com/income-tax/distributable-net-income/ 1 2024-10-18 04:48 +00:00
+https://helovesmath.com/income-tax/income-statement-vs-profit-and-loss/ 1 2024-10-18 04:41 +00:00
+https://helovesmath.com/study-notes/what-is-billable-expense-income/ 1 2024-10-18 04:32 +00:00
+https://helovesmath.com/study-notes/american-income-life-lawsuit/ 0 2024-10-18 04:24 +00:00
+https://helovesmath.com/study-notes/comcast-for-low-income-students/ 0 2024-10-18 04:20 +00:00
+https://helovesmath.com/income-tax/the-comptroller-of-income-tax/ 0 2024-10-18 04:15 +00:00
+https://helovesmath.com/math/income-statement/ 7 2024-10-18 04:01 +00:00
+https://helovesmath.com/math/universal-basic-income/ 1 2024-10-18 03:12 +00:00
+https://helovesmath.com/math/how-to-calculate-z-score/ 3 2024-10-18 03:01 +00:00
+https://helovesmath.com/math/how-to-calculate-net-income/ 1 2024-10-17 19:53 +00:00
+https://helovesmath.com/math/how-to-calculate-standard-deviation/ 5 2024-10-17 19:41 +00:00
+https://helovesmath.com/math/how-to-multiply-fractions-a-detailed-guide/ 1 2024-10-17 19:20 +00:00
+https://helovesmath.com/math/how-to-find-the-range-in-math/ 1 2024-10-17 19:09 +00:00
+https://helovesmath.com/study-notes/the-risks-and-benefits-of-chat-gpt-a-comprehensive-analysis/ 1 2024-10-17 18:43 +00:00
+https://helovesmath.com/study-notes/understanding-3d-shapes-a-comprehensive-guide/ 1 2024-10-17 18:08 +00:00
+https://helovesmath.com/ap-world-history-modern/mercantilism-ap-world-history/ 1 2024-10-17 17:35 +00:00
+https://helovesmath.com/math/how-to-make-a-3d-shape-a-step-by-step-guide/ 1 2024-10-17 17:24 +00:00
+https://helovesmath.com/math/comprehensive-guide-to-common-math-terms-what-they-mean-and-how-they-are-used/ 1 2024-10-11 22:58 +00:00
+https://helovesmath.com/sat/contabilidad-electronica-sat-todo-lo-que-necesitas-saber/ 1 2024-10-11 22:49 +00:00
+https://helovesmath.com/homework-resources/kindergarten-lessons-lessons-by-grade-free-lessons/ 0 2024-10-10 22:33 +00:00
+https://helovesmath.com/homework-resources/free-multiplication-charts-and-worksheets-printable-color-bw/ 0 2024-10-10 22:13 +00:00
+https://helovesmath.com/homework-resources/math-worksheets-free-pdf-printables-worksheets/ 0 2024-10-10 21:53 +00:00
+https://helovesmath.com/homework-resources/a-level-mathematics-pret-homeworks/ 0 2024-10-10 21:37 +00:00
+https://helovesmath.com/homework-resources/data-mathematics-pret-homeworks/ 0 2024-10-10 21:34 +00:00
+https://helovesmath.com/homework-resources/shape-mathematics-pret-homeworks/ 0 2024-10-10 21:31 +00:00
+https://helovesmath.com/homework-resources/first-grade-math-worksheets/ 0 2024-10-10 21:16 +00:00
+https://helovesmath.com/calculator/fraction-calculator/ 0 2024-09-21 21:49 +00:00
+https://helovesmath.com/past-papers/edexcel-gcse-maths-past-papers/ 0 2024-09-20 23:35 +00:00
+https://helovesmath.com/past-papers/aqa-gcse-further-maths-past-papers/ 0 2024-09-20 23:26 +00:00
+https://helovesmath.com/past-papers/aqa-gcse-maths-past-papers/ 0 2024-09-20 23:25 +00:00
+https://helovesmath.com/length-converter/feet-to-inches-ft-to-in-conversion-calculator/ 0 2024-08-23 00:28 +00:00
+https://helovesmath.com/length-converter/feet-to-feetinches-ft-to-ftin-conversion-calculator/ 0 2024-08-23 00:24 +00:00
+https://helovesmath.com/length-converter/feet-to-cm-converter/ 0 2024-08-23 00:20 +00:00
+https://helovesmath.com/length-converter/centimeters-to-yards-yd-converter/ 0 2024-08-22 22:15 +00:00
+https://helovesmath.com/length-converter/cm-to-mm-centimeters-to-millimeters-conversion/ 0 2024-08-22 21:54 +00:00
+https://helovesmath.com/length-converter/centimeters-to-miles-cm-to-mi-converter/ 0 2024-08-22 21:50 +00:00
+https://helovesmath.com/length-converter/cm-to-meters-converter/ 0 2024-08-22 21:43 +00:00
+https://helovesmath.com/length-converter/cm-to-km-converter/ 0 2024-08-22 21:40 +00:00
+https://helovesmath.com/length-converter/cm-to-inches-converter/ 0 2024-08-22 21:35 +00:00
+https://helovesmath.com/length-converter/cm-to-feetinches-ftin-converter/ 0 2024-08-22 21:28 +00:00
+https://helovesmath.com/length-converter/cm-to-feet-converter/ 0 2024-08-22 21:14 +00:00
+https://helovesmath.com/health-fitness-calculators/bmi-calculator/ 1 2024-08-22 20:42 +00:00
+https://helovesmath.com/aqa/aqa-gcse-maths-past-papers-mark-schemes/ 0 2024-08-22 08:45 +00:00
+https://helovesmath.com/aqa/gcse-aqa-biology-past-papers-mark-schemes/ 0 2024-08-22 08:44 +00:00
+https://helovesmath.com/aqa/gcse-chemistry-past-papers-mark-schemes-and-specimen-papers/ 0 2024-08-22 08:44 +00:00
+https://helovesmath.com/aqa/aqa-gcse-physics-past-papers-mark-schemes-and-specimen-papers/ 0 2024-08-22 08:44 +00:00
+https://helovesmath.com/aqa/gcse-combined-science-aqa-past-papers/ 0 2024-08-22 08:44 +00:00
+https://helovesmath.com/aqa/aqa-gcse-english-language-past-papers-mark-schemes/ 0 2024-08-22 08:43 +00:00
+https://helovesmath.com/aqa/aqa-gcse-english-literature-past-papers-mark-schemes/ 0 2024-08-22 08:43 +00:00
+https://helovesmath.com/aqa/aqa-gcse-geography-past-papers-aqa-exam-mark-schemes/ 0 2024-08-22 08:43 +00:00
+https://helovesmath.com/aqa/aqa-gcse-history-past-papers-aqa-exam-mark-schemes/ 0 2024-08-22 08:43 +00:00
+https://helovesmath.com/aqa/aqa-gcse-computer-science-past-papers-mark-schemes/ 0 2024-08-22 08:43 +00:00
+https://helovesmath.com/aqa/aqa-gcse-business-past-papers-mark-schemes/ 0 2024-08-22 08:42 +00:00
+https://helovesmath.com/aqa/aqa-gcse-economics-past-papers-mark-schemes/ 0 2024-08-22 08:42 +00:00
+https://helovesmath.com/ocr/ocr-gateway-gcse-biology-past-papers/ 0 2024-08-21 22:29 +00:00
+https://helovesmath.com/ocr/ocr-gcse-maths-past-papers/ 0 2024-08-21 22:24 +00:00
+https://helovesmath.com/sqa/maths-homework-and-revision-national-4-mathematics/ 0 2024-08-21 21:18 +00:00
+https://helovesmath.com/sqa/sqa-higher-revision-notes-mathematics/ 0 2024-08-21 20:26 +00:00
+https://helovesmath.com/sqa/national-5-maths-revision-notes-mathematics/ 0 2024-08-21 20:21 +00:00
+https://helovesmath.com/sqa/national-4-maths-revision-notes-mathematics/ 0 2024-08-21 20:13 +00:00
+https://helovesmath.com/ 0 2025-05-03 23:51 +00:00
+https://helovesmath.com/bubble-pop-memory-match-endless-alphabet-panda-pop-games/ 0 2025-04-29 02:01 +00:00
+https://helovesmath.com/search-by-topic-free-resources/ 0 2025-04-29 01:54 +00:00
+https://helovesmath.com/educational-content-disclaimer/ 0 2025-04-27 22:18 +00:00
+https://helovesmath.com/cookie-policy/ 0 2025-04-27 22:16 +00:00
+https://helovesmath.com/terms-of-use/ 0 2025-04-27 22:11 +00:00
+https://helovesmath.com/privacy-policy/ 0 2025-04-27 22:04 +00:00
+https://helovesmath.com/legal-policies/ 0 2025-04-26 16:37 +00:00
+https://helovesmath.com/content-policy/ 0 2025-04-26 16:30 +00:00
+https://helovesmath.com/affiliate-disclosure/ 0 2025-04-26 16:26 +00:00
+https://helovesmath.com/accessibility-statement/ 0 2025-04-26 16:24 +00:00
+https://helovesmath.com/childrens-privacy-policy/ 0 2025-04-26 15:59 +00:00
+https://helovesmath.com/dmca-copyright-policy/ 0 2025-04-26 15:57 +00:00
+https://helovesmath.com/security-policy/ 0 2025-04-26 15:54 +00:00
+https://helovesmath.com/refund-cancellation-policy/ 0 2025-04-26 15:46 +00:00
+https://helovesmath.com/number-and-measure-edexcel-awards-in-mathematics/ 0 2025-04-25 23:24 +00:00
+https://helovesmath.com/algebra-edexcel-awards-in-mathematics/ 0 2025-04-25 23:14 +00:00
+https://helovesmath.com/about-us/ 0 2025-04-25 23:14 +00:00
+https://helovesmath.com/ks3-maths-papers-year-9-maths-tests-free-downloads/ 0 2025-04-25 20:56 +00:00
+https://helovesmath.com/ordering-and-comparing-numbers/ 0 2025-04-25 14:43 +00:00
+https://helovesmath.com/bubble-pop-game/ 0 2025-04-24 21:39 +00:00
+https://helovesmath.com/ib-resources/ 3 2025-04-19 00:16 +00:00
+https://helovesmath.com/grade-calculator/ 0 2025-04-11 23:09 +00:00
+https://helovesmath.com/contact/ 0 2025-04-04 05:10 +00:00
+https://helovesmath.com/workbooks/ 0 2025-04-04 05:02 +00:00
+https://helovesmath.com/wjec-gcse-maths-past-papers/ 0 2025-04-04 05:02 +00:00
+https://helovesmath.com/wjec-gcse-maths-numeracy-past-papers/ 0 2025-04-04 05:02 +00:00
+https://helovesmath.com/what-is-mastery-of-mathematics/ 0 2025-04-04 05:01 +00:00
+https://helovesmath.com/what-is-geometry-everything-about-geometry/ 0 2025-04-04 05:01 +00:00
+https://helovesmath.com/unit-3-trigonometric-and-polar-functions-pre-calculus/ 0 2025-04-04 05:01 +00:00
+https://helovesmath.com/unit-2-exponential-and-logarithmic-functions-pre-calculus/ 0 2025-04-04 05:01 +00:00
+https://helovesmath.com/unit-1-polynomial-and-rational-functions-pre-calculus/ 0 2025-04-04 05:01 +00:00
+https://helovesmath.com/tags/ 0 2025-04-04 05:00 +00:00
+https://helovesmath.com/sociology-igcse-past-papers/ 0 2025-04-04 05:00 +00:00
+https://helovesmath.com/shape-resources/ 0 2025-04-04 05:00 +00:00
+https://helovesmath.com/resources-for-a-level-and-gcse-chemistry/ 0 2025-04-04 05:00 +00:00
+https://helovesmath.com/primary-resources-maths-calculations-using-a-calculator-bodmas/ 0 2025-04-04 04:59 +00:00
+https://helovesmath.com/primary-resources-maths-calculations-doubling-halving/ 0 2025-04-04 04:59 +00:00
+https://helovesmath.com/physics-igcse-past-papers/ 0 2025-04-04 04:59 +00:00
+https://helovesmath.com/pakistan-studies-igcse-past-papers/ 0 2025-04-04 04:58 +00:00
+https://helovesmath.com/online-calculators-tools/ 0 2025-04-04 04:58 +00:00
+https://helovesmath.com/ocr-revision-guides/ 0 2025-04-04 04:58 +00:00
+https://helovesmath.com/ocr-gcse-maths-past-papers/ 0 2025-04-04 04:58 +00:00
+https://helovesmath.com/number-resources/ 0 2025-04-04 04:57 +00:00
+https://helovesmath.com/maths-sats-papers-for-year-6-1999-2024-april-2024/ 0 2025-04-04 04:57 +00:00
+https://helovesmath.com/maths-igcse-past-papers/ 0 2025-04-04 04:57 +00:00
+https://helovesmath.com/mathematics-he-loves-math-algebra/ 0 2025-04-04 04:56 +00:00
+https://helovesmath.com/mathematics-he-loves-math-number/ 0 2025-04-04 04:56 +00:00
+https://helovesmath.com/mathematics-h449-past-papers-ocr-oxford-cambridge-and-rsa/ 0 2025-04-04 04:56 +00:00
+https://helovesmath.com/mathematics-bmei-h630-h640-as-a-level-past-papers-ocr-oxford-cambridge-and-rsa/ 0 2025-04-04 04:55 +00:00
+https://helovesmath.com/mathematics-a-h230-h240-as-a-level-past-papers-ocr-oxford-cambridge-and-rsa/ 0 2025-04-04 04:55 +00:00
+https://helovesmath.com/mathematics-9-1-gcse-past-papers-ocr-oxford-cambridge-and-rsa/ 0 2025-04-04 04:55 +00:00
+https://helovesmath.com/mathematics-8361-8362-functional-skills-past-papers-oxford-aqa-international-qualifications/ 0 2025-04-04 04:55 +00:00
+https://helovesmath.com/mathematics-7357-as-a-level-past-papers-oxford-aqa-international-qualifications/ 0 2025-04-04 04:54 +00:00
+https://helovesmath.com/mathematics-7356-as-a-level-past-papers-oxford-aqa-international-qualifications/ 0 2025-04-04 04:54 +00:00
+https://helovesmath.com/mathematics-5930-elc-past-papers-oxford-aqa-international-qualifications/ 0 2025-04-04 04:53 +00:00
+https://helovesmath.com/math-calculators/ 0 2025-04-04 04:53 +00:00
+https://helovesmath.com/level-3-further-mathematics-1350-aqa-certificate-past-papers-oxford-aqa-international-qualifications/ 0 2025-04-04 04:53 +00:00
+https://helovesmath.com/level-2-further-mathematics-8365-aqa-certificate-past-papers-oxford-aqa-international-qualifications/ 0 2025-04-04 04:53 +00:00
+https://helovesmath.com/islamiyat-igcse-past-papers/ 0 2025-04-04 04:52 +00:00
+https://helovesmath.com/international-a-level-chemistry/ 0 2025-04-04 04:51 +00:00
+https://helovesmath.com/information-and-communication-technology-ict-igcse-past-papers/ 0 2025-04-04 04:51 +00:00
+https://helovesmath.com/history-igcse-past-papers/ 0 2025-04-04 04:51 +00:00
+https://helovesmath.com/he-loves-math-primary-ks2-sats-revision/ 0 2025-04-04 04:49 +00:00
+https://helovesmath.com/he-loves-math-math-made-easy/ 0 2025-04-04 04:49 +00:00
+https://helovesmath.com/he-loves-math-a-level-maths-revision/ 0 2025-04-04 04:49 +00:00
+https://helovesmath.com/graph-tool/ 0 2025-04-04 04:49 +00:00
+https://helovesmath.com/german-foreign-language-igcse-past-papers/ 0 2025-04-04 04:48 +00:00
+https://helovesmath.com/geography-igcse-past-papers/ 0 2025-04-04 04:48 +00:00
+https://helovesmath.com/gcse-statistics-8382-past-papers-oxford-aqa-international-qualifications/ 0 2025-04-04 04:48 +00:00
+https://helovesmath.com/gcse-mathematics-8300-past-papers-oxford-aqa-international-qualifications/ 0 2025-04-04 04:48 +00:00
+https://helovesmath.com/further-mathematics-igcse-past-papers-adexcel/ 0 2025-04-04 04:47 +00:00
+https://helovesmath.com/further-mathematics-bmei-h635-h645-as-a-level-past-papers-ocr-oxford-cambridge-and-rsa/ 0 2025-04-04 04:47 +00:00
+https://helovesmath.com/further-mathematics-a-h235-h245-as-a-level-past-papers-ocr-oxford-cambridge-and-rsa/ 0 2025-04-04 04:47 +00:00
+https://helovesmath.com/further-mathematics-7367-as-a-level-past-papers-oxford-aqa-international-qualifications/ 0 2025-04-04 04:47 +00:00
+https://helovesmath.com/further-mathematics-7366-as-a-level-past-papers-oxford-aqa-international-qualifications/ 0 2025-04-04 04:47 +00:00
+https://helovesmath.com/free-online-calculators-math-fitness-finance-science/ 0 2025-04-04 04:46 +00:00
+https://helovesmath.com/free-online-calculators-math-fitness-finance-science-2/ 1 2025-04-04 04:46 +00:00
+https://helovesmath.com/free-n4-n4-applications-of-maths-national-5-maths/ 0 2025-04-04 04:46 +00:00
+https://helovesmath.com/environmental-management-igcse-past-papers/ 0 2025-04-04 04:46 +00:00
+https://helovesmath.com/endless-alphabet-game/ 0 2025-04-04 04:45 +00:00
+https://helovesmath.com/edexcel-revision-guides/ 0 2025-04-04 04:45 +00:00
+https://helovesmath.com/edexcel-past-papers-past-exam-papers-pearson-qualifications/ 4 2025-04-04 04:45 +00:00
+https://helovesmath.com/edexcel-igcse-past-exam-papers/ 0 2025-04-04 04:45 +00:00
+https://helovesmath.com/edexcel-gcse-statistics-past-papers-2/ 0 2025-04-04 04:44 +00:00
+https://helovesmath.com/edexcel-gcse-statistics-past-papers/ 0 2025-04-04 04:44 +00:00
+https://helovesmath.com/economics-igcse-past-papers/ 0 2025-04-04 04:44 +00:00
+https://helovesmath.com/dubai-business-setup-guide/ 0 2025-04-04 04:44 +00:00
+https://helovesmath.com/data-resources/ 0 2025-04-04 04:43 +00:00
+https://helovesmath.com/core-maths-bmei-level-3-certificate-h869-past-papers-ocr-oxford-cambridge-and-rsa/ 0 2025-04-04 04:43 +00:00
+https://helovesmath.com/core-maths-amei-level-3-certificate-h868-past-papers-ocr-oxford-cambridge-and-rsa/ 0 2025-04-04 04:43 +00:00
+https://helovesmath.com/computer-science-igcse-past-papers/ 0 2025-04-04 04:42 +00:00
+https://helovesmath.com/combined-science-igcse-past-papers/ 0 2025-04-04 04:42 +00:00
+https://helovesmath.com/chemistry-igcse-past-papers/ 0 2025-04-04 04:42 +00:00
+https://helovesmath.com/biology9700-igcse-past-papers/ 0 2025-04-04 04:42 +00:00
+https://helovesmath.com/biology-igcse-past-papers/ 0 2025-04-04 04:41 +00:00
+https://helovesmath.com/art-and-design-igcse-past-papers/ 0 2025-04-04 04:41 +00:00
+https://helovesmath.com/arabic9680-igcse-past-papers/ 0 2025-04-04 04:41 +00:00
+https://helovesmath.com/arabic-igcse-past-papers/ 0 2025-04-04 04:41 +00:00
+https://helovesmath.com/aqa-revision-guides/ 0 2025-04-04 04:40 +00:00
+https://helovesmath.com/aqa-gcse-statistics-past-papers/ 0 2025-04-04 04:40 +00:00
+https://helovesmath.com/aqa-gcse-chemistry-revision-guides/ 0 2025-04-04 04:39 +00:00
+https://helovesmath.com/ap-calculus-ab-past-exam-questions/ 0 2025-04-04 04:39 +00:00
+https://helovesmath.com/algebra-resources/ 0 2025-04-04 04:39 +00:00
+https://helovesmath.com/agriculture-igcse-past-papers/ 0 2025-04-04 04:38 +00:00
+https://helovesmath.com/additional-mathematics-6993-free-standing-maths-qualification-past-papers-ocr-oxford-cambridge-and-rsa/ 0 2025-04-04 04:38 +00:00
+https://helovesmath.com/accounting9706-igcse-past-papers/ 0 2025-04-04 04:38 +00:00
+https://helovesmath.com/accounting-igcse-past-papers/ 0 2025-04-04 04:38 +00:00
+https://helovesmath.com/a-level-textbook/ 0 2025-04-04 04:37 +00:00
+https://helovesmath.com/404-he-loves-math/ 0 2025-04-04 04:37 +00:00
+https://helovesmath.com/2023-sats-papers-year-6-english-maths-free-download/ 0 2025-04-04 04:37 +00:00
+https://helovesmath.com/memory-match-game/ 0 2025-03-12 00:14 +00:00
+https://helovesmath.com/panda-pop-game/ 0 2025-03-12 00:14 +00:00
+https://helovesmath.com/maths-past-papers/ 0 2025-03-06 02:10 +00:00
+https://helovesmath.com/fractions-decimals-percentages/ 0 2025-01-24 00:11 +00:00
+https://helovesmath.com/patterns-and-number-sequences/ 0 2025-01-24 00:03 +00:00
+https://helovesmath.com/negative-numbers-guide-with-examples/ 0 2025-01-23 23:57 +00:00
+https://helovesmath.com/primary-resources-maths-numbers-and-the-number-system-counting/ 0 2025-01-22 23:11 +00:00
+https://helovesmath.com/primary-resources-maths-calculations-addition-and-subtraction/ 0 2025-01-22 22:34 +00:00
+https://helovesmath.com/primary-resources-maths-multiplication-division/ 0 2025-01-22 22:26 +00:00
+https://helovesmath.com/fraction-calculator/ 0 2024-11-28 03:24 +00:00
+https://helovesmath.com/interactive-conversion-tool/ 0 2024-09-20 23:12 +00:00
+https://helovesmath.com/aqa-gcse-further-maths-past-papers/ 0 2024-08-14 05:11 +00:00
+https://helovesmath.com/edexcel-gcse-maths-past-papers-2/ 0 2024-08-14 05:07 +00:00
+https://helovesmath.com/aqa-gcse-maths-past-papers/ 0 2024-08-14 04:58 +00:00
+https://helovesmath.com/edexcel-gcse-maths-past-papers/ 0 2024-08-14 04:58 +00:00
+`;
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Set current year in footer
+        const currentYearSpan = document.getElementById('current-year');
+        if (currentYearSpan) {
+            currentYearSpan.textContent = new Date().getFullYear();
+        }
+
+        // Mobile menu toggle
+        const menuToggle = document.querySelector('.mobile-menu-toggle');
+        const mainNav = document.getElementById('main-nav');
+        if (menuToggle && mainNav) {
+            menuToggle.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+                menuToggle.setAttribute('aria-expanded', mainNav.classList.contains('active'));
+            });
+        }
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('#main-nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                    if (mainNav && mainNav.classList.contains('active')) {
+                        mainNav.classList.remove('active');
+                        menuToggle.setAttribute('aria-expanded', 'false');
+                    }
+                }
+            });
+        });
+
+        // --- Data Processing and Rendering ---
+        const allLinksData = parseOcrData(ocrDataString);
+        const categorizedLinks = categorizeLinks(allLinksData);
+        renderLinks(categorizedLinks);
+        renderPolicyLinks(allLinksData); // Render policy links separately in footer
+
+        // Search/Filter functionality (must be after links are rendered)
+        const searchBar = document.getElementById('search-bar');
+        if (searchBar) {
+            searchBar.addEventListener('input', function(e) { // Use 'input' for better responsiveness
+                const searchTerm = e.target.value.toLowerCase().trim();
+                const allListItems = document.querySelectorAll('.resource-container .link-list li');
+                const allCategoryGroups = document.querySelectorAll('.resource-container .category-group');
+
+                allCategoryGroups.forEach(group => {
+                    const listItemsInGroup = group.querySelectorAll('.link-list li');
+                    let categoryHasVisibleItem = false;
+                    listItemsInGroup.forEach(item => {
+                        const linkText = item.textContent.toLowerCase();
+                        if (linkText.includes(searchTerm)) {
+                            item.classList.remove('hidden');
+                            categoryHasVisibleItem = true;
+                        } else {
+                            item.classList.add('hidden');
+                        }
+                    });
+
+                    if (categoryHasVisibleItem || searchTerm === "") {
+                        group.classList.remove('hidden-category');
+                    } else {
+                        group.classList.add('hidden-category');
+                    }
+                });
+            });
+        }
+         // Remove loading message
+        const loadingMsg = document.getElementById('loading-message');
+        if(loadingMsg) loadingMsg.remove();
+
+    }); // End DOMContentLoaded
+
+
+    function parseOcrData(dataString) {
+        const lines = dataString.trim().split('\n');
+        const links = [];
+        const lineRegex = /^(https?:\/\/[^\s]+)\s+([\d\w]+)\s+(\d{4}-\d{2}-\d{2})\s+([\d:]+\s+[+-]\d{2}:\d{2})$/;
+
+        lines.forEach(line => {
+            line = line.trim();
+            if (!line) return;
+
+            const parts = line.split(/\s+/);
+            if (parts.length >= 4) {
+                const url = parts[0];
+                // The "images" column might be a number or sometimes part of the URL if lines are merged.
+                // We'll make a best guess.
+                let images = parts[1];
+                let lastModDate = parts[2];
+                let lastModTime = parts[3];
+                let lastModTimezone = parts.length > 4 ? parts[4] : "+00:00";
+
+
+                // Check if second part is actually part of URL due to space in URL in OCR
+                if (!lastModDate.match(/^\d{4}-\d{2}-\d{2}$/) && images.match(/^\d{4}-\d{2}-\d{2}$/)) {
+                     // Shift occurred
+                     lastModTimezone = lastModTime;
+                     lastModTime = lastModDate;
+                     lastModDate = images;
+                     images = "0"; // Assume 0 if parsing is tricky
+                } else if (!images.match(/^[\d\w]+$/) || images.length > 3 ) { // If images is not a simple number
+                    images = "0"; // default if ambiguous
+                }
+
+
+                // Reconstruct lastMod, ensuring parts[3] contains time
+                if (parts.length > 3 && parts[3].includes(':') && parts[3].includes('+')) {
+                     lastModTime = parts[3].split(' ')[0];
+                     lastModTimezone = parts[3].split(' ')[1];
+                } else if (parts.length > 4 && parts[4].includes(':') && parts[4].includes('+')) {
+                     lastModTime = parts[3]; // parts[3] is time, parts[4] is timezone
+                     lastModTimezone = parts[4];
+                } else {
+                    // Default if time/timezone parsing is difficult
+                    lastModTime = "00:00";
+                    lastModTimezone = "+00:00";
+                }
+
+
+                links.push({
+                    url: url,
+                    images: images, // Will be a string, can convert to int if needed
+                    lastMod: `${lastModDate} ${lastModTime} ${lastModTimezone}`.replace(/\s\s+/g, ' ').trim()
+                });
+            }
+        });
+        return links;
+    }
+
+    function generateAnchorText(url) {
+        try {
+            const path = new URL(url).pathname;
+            // Remove leading/trailing slashes and .html/.php if present
+            let slug = path.replace(/^\/+|\/+$/g, '').replace(/\.(html|php)$/, '');
+            // Handle specific encoded characters like %e2%80%91 (non-breaking hyphen)
+            slug = decodeURIComponent(slug);
+
+            // If slug is very short or just a base path, use a default
+            if (slug === 'helovesmath.com' || slug === '') {
+                 if (url.endsWith('about-us/')) return 'About Us';
+                 if (url.endsWith('contact/')) return 'Contact Us';
+                 return "Homepage";
+            }
+
+            // Specific known valuable pages
+            if (slug === "past-papers/edexcel-gcse-maths-past-papers") return "Edexcel GCSE Maths Past Papers (Main)";
+            if (slug === "past-papers/aqa-gcse-maths-past-papers") return "AQA GCSE Maths Past Papers (Main)";
+
+
+            const parts = slug.split('/');
+            let title = parts[parts.length - 1]; // Get the last part of the slug
+
+            // Remove common prefixes or suffixes if they are generic
+            title = title.replace(/^(calculator|study-notes|past-papers|homework-resources|worksheet|guide)-/i, '');
+            title = title.replace(/-calculator$/, '');
+
+            title = title.replace(/-/g, ' ')
+                         .replace(/%([0-9A-Fa-f]{2})/g, (match, p1) => String.fromCharCode(parseInt(p1, 16))) // Decode URI components
+                         .replace(/\b(aqa|ocr|ib|ap|gcse|sat|mei|cie|as|edexcel)\b/gi, match => match.toUpperCase()) // Uppercase exam boards
+                         .replace(/\b(pdf|faq|guide|vs|how|to|and|for|in|of|the|is|with|on)\b/gi, match => {
+                             // Lowercase common short words unless they start the title
+                             if (title.toLowerCase().startsWith(match + " ")) return match;
+                             return match.toLowerCase();
+                         })
+                         .replace(/\b(ks2|ks3)\b/gi, match => match.toUpperCase())
+                         .replace(/\b(1st|2nd|3rd|4th|5th)\b/i, match => match); // Keep ordinals as is
+
+
+            // Capitalize each word
+            title = title.split(' ')
+                         .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                         .join(' ');
+
+            // Truncate if too long, but try to keep it meaningful
+            if (title.length > 70 && title.includes('Past Papers')) {
+                title = title.substring(0, title.lastIndexOf('Past Papers') + 11) + "...";
+            } else if (title.length > 80) {
+                title = title.substring(0, 77) + "...";
+            }
+
+
+            return title.trim();
+        } catch (e) {
+            console.error("Error generating anchor text for:", url, e);
+            // Fallback for invalid URLs or parsing errors
+            const parts = url.split('/');
+            return parts[parts.length - 2] || parts[parts.length - 1] || "Link";
+        }
+    }
+
+
+    function getCategory(url) {
+        const path = new URL(url).pathname.toLowerCase();
+
+        if (path.includes('/calculator/') || path.includes('/math-calculator/') || path.includes('/tools/') && (path.includes('calculator') || path.includes('converter') || path.includes('generator'))) return 'Calculators & Tools';
+        if (path.includes('/length-converter/')) return 'Calculators & Tools (Converters)';
+        if (path.includes('/fitness-and-health-calculators/') || path.includes('/health-and-fitness-calculators/')) return 'Health & Fitness Calculators';
+
+        if (path.includes('/study-notes/') || path.includes('/basic-math/') || path.includes('/formulas/') || path.includes('/cheatsheet/')) return 'Study Notes & Formulas';
+        if (path.includes('/mental-math/')) return 'Study Notes & Formulas (Mental Math)';
+
+        if (path.includes('/sat/')) return 'Test Prep (SAT)';
+        if (path.includes('/ap/') || path.includes('/ap-computer-science-principles/') || path.includes('/ap-psychology/') || path.includes('/ap-precalculus/') || path.includes('/ap-world-history-modern/')) return 'Test Prep (AP)';
+        if (path.includes('/ib/')) return 'Test Prep (IB)';
+        if (path.includes('/gcse-past-papers/') || path.includes('-gcse-') && path.includes('past-papers')) return 'Test Prep (GCSE & IGCSE)';
+        if (path.includes('/aqa/') && (path.includes('past-paper') || path.includes('revision'))) return 'Test Prep (AQA)';
+        if (path.includes('/edexcel/') && (path.includes('past-paper') || path.includes('revision'))) return 'Test Prep (Edexcel)';
+        if (path.includes('/ocr/') && (path.includes('past-paper') || path.includes('revision'))) return 'Test Prep (OCR)';
+        if (path.includes('/sqa/')) return 'Test Prep (SQA)';
+        if (path.includes('/neet/') || path.includes('/jee-exam/')) return 'Test Prep (India Entrance Exams)';
+        if (path.includes('/past-papers/')) return 'Test Prep (General Past Papers)'; // Catch-all for other past papers
+        if (path.includes('/as-and-a-level/') || path.includes('-a-level-') || path.includes('-as-maths-')) return 'Test Prep (A-Level & AS-Level)';
+
+
+        if (path.includes('/homework-resources/') || path.includes('/worksheets/')) return 'Homework & Worksheets';
+        if (path.includes('/news/')) return 'News & Articles';
+        if (path.includes('/ai/') || path.includes('/chatgpt/') || path.includes('/data-science/')) return 'AI, Data Science & Tech';
+        if (path.includes('/guides/') || path.includes('/projects/') || path.includes('/business-management/')) return 'Guides & Projects';
+        if (path.includes('/finance/') || path.includes('/insurance/') || path.includes('/income-tax/')) return 'Finance, Insurance & Tax';
+        if (path.includes('/math-game/') || path.includes('game') && !path.includes('past-papers')) return 'Math Games & Interactive';
+        if (path.includes('/math/') || path.includes('/mathematics/') || path.includes('/junior-math/') || path.includes('/college-algebra/') || path.includes('/calculus-ii/')) return 'Math Topics & Concepts';
+
+
+        // Policy & Site Structure Links (handled separately for footer/nav)
+        if (path.match(/\/(privacy-policy|terms-of-use|cookie-policy|content-policy|affiliate-disclosure|dmca-copyright-policy|security-policy|accessibility-statement|educational-content-disclaimer|legal-policies|childrens-privacy-policy|refund-cancellation-policy)\/?$/)) return 'Policy';
+        if (path.match(/\/(about-us|contact|tags|ib-resources|grade-calculator|workbooks|search-by-topic-free-resources)\/?$/)) return 'Site Structure';
+        if (path === '/' || path === '/helovesmath.com/') return 'Homepage Link'; // The single root link
+
+        return 'Other Resources'; // Default category
+    }
+
+
+    function renderLinks(categorizedLinks) {
+        const container = document.getElementById('all-resources-container');
+        container.innerHTML = ''; // Clear loading message or previous content
+
+        // Define a preferred order for categories
+        const categoryOrder = [
+            'Calculators & Tools',
+            'Calculators & Tools (Converters)',
+            'Health & Fitness Calculators',
+            'Study Notes & Formulas',
+            'Study Notes & Formulas (Mental Math)',
+            'Math Topics & Concepts',
+            'Homework & Worksheets',
+            'Test Prep (SAT)',
+            'Test Prep (AP)',
+            'Test Prep (IB)',
+            'Test Prep (GCSE & IGCSE)',
+            'Test Prep (A-Level & AS-Level)',
+            'Test Prep (AQA)',
+            'Test Prep (Edexcel)',
+            'Test Prep (OCR)',
+            'Test Prep (SQA)',
+            'Test Prep (India Entrance Exams)',
+            'Test Prep (General Past Papers)',
+            'Math Games & Interactive',
+            'AI, Data Science & Tech',
+            'News & Articles',
+            'Guides & Projects',
+            'Finance, Insurance & Tax',
+            'Other Resources' // Keep 'Other' last
+        ];
+
+        // Add any categories from data not in preferred order (to ensure all are shown)
+        for (const cat in categorizedLinks) {
+            if (!categoryOrder.includes(cat) && cat !== 'Policy' && cat !== 'Site Structure' && cat !== 'Homepage Link') {
+                categoryOrder.push(cat);
+            }
+        }
+
+
+        categoryOrder.forEach(categoryName => {
+            if (categorizedLinks[categoryName] && categorizedLinks[categoryName].length > 0) {
+                const section = document.createElement('section');
+                section.id = categoryName.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+                section.className = 'category-group';
+
+                const title = document.createElement('h2');
+                const titleLink = document.createElement('a');
+                // Try to find a base URL for the category if one exists among the links
+                let categoryBaseUrl = `https://helovesmath.com/${section.id}/`; // Default guess
+                const firstPathSegment = categoryName.split('(')[0].trim().toLowerCase().replace(/\s&\s/g, '-').replace(/\s/g, '-');
+
+                const sampleUrlForCat = categorizedLinks[categoryName][0].url;
+                try {
+                    const urlObj = new URL(sampleUrlForCat);
+                    const pathParts = urlObj.pathname.split('/').filter(p => p);
+                    if(pathParts.length > 0 && (pathParts[0] === firstPathSegment || firstPathSegment.startsWith(pathParts[0]))) {
+                       categoryBaseUrl = `${urlObj.origin}/${pathParts[0]}/`;
+                    } else if (categoryName.toLowerCase().includes('calculator')) {
+                        categoryBaseUrl = `https://helovesmath.com/online-calculators-tools/`;
+                    } else if (categoryName.toLowerCase().includes('study notes')) {
+                         categoryBaseUrl = `https://helovesmath.com/study-notes/`;
+                    } // Add more specific base URLs if known
+                } catch(e){}
+
+
+                titleLink.href = categoryBaseUrl;
+                titleLink.textContent = categoryName;
+                title.appendChild(titleLink);
+                section.appendChild(title);
+
+                const ul = document.createElement('ul');
+                ul.className = 'link-list';
+
+                // Sort links within category by Last Mod Date (descending), then alphabetically
+                categorizedLinks[categoryName].sort((a, b) => {
+                    const dateComparison = new Date(b.lastMod.split(" ")[0]) - new Date(a.lastMod.split(" ")[0]);
+                    if (dateComparison !== 0) return dateComparison;
+                    return a.anchorText.localeCompare(b.anchorText);
+                });
+
+
+                categorizedLinks[categoryName].forEach(link => {
+                    const li = document.createElement('li');
+                    const a = document.createElement('a');
+                    a.href = link.url;
+                    a.textContent = link.anchorText;
+                    // a.target = "_blank"; // Optional: open in new tab
+                    li.appendChild(a);
+
+                    const lastModSpan = document.createElement('span');
+                    lastModSpan.className = 'last-mod';
+                    lastModSpan.textContent = `(Mod: ${link.lastMod.split(' ')[0]})`; // Just date for brevity
+                    li.appendChild(lastModSpan);
+
+                    if (link.images && parseInt(link.images) > 0) {
+                        const imgFlag = document.createElement('span');
+                        imgFlag.className = 'images-flag';
+                        imgFlag.innerHTML = ` &#x1F4F8;`; // Camera emoji
+                        imgFlag.title = `${link.images} image(s) on page`;
+                        li.appendChild(imgFlag);
+                    }
+
+                    ul.appendChild(li);
+                });
+                section.appendChild(ul);
+                container.appendChild(section);
+            }
+        });
+    }
+
+    function categorizeLinks(allLinks) {
+        const categories = {};
+        allLinks.forEach(link => {
+            const category = getCategory(link.url);
+            link.anchorText = generateAnchorText(link.url); // Add anchor text to link object
+
+            if (!categories[category]) {
+                categories[category] = [];
+            }
+            // Avoid duplicates (based on URL)
+            if (!categories[category].find(l => l.url === link.url)) {
+                 categories[category].push(link);
+            }
+        });
+        return categories;
+    }
+
+    function renderPolicyLinks(allLinks) {
+        const footerNav = document.getElementById('footer-policy-links');
+        if (!footerNav) return;
+
+        const policyOrder = [
+            "about-us", "contact", "privacy-policy", "terms-of-use", "cookie-policy",
+            "content-policy", "affiliate-disclosure", "dmca-copyright-policy",
+            "security-policy", "accessibility-statement", "educational-content-disclaimer",
+            "legal-policies", "childrens-privacy-policy", "refund-cancellation-policy"
+        ];
+
+        const policyLinks = allLinks.filter(link => getCategory(link.url) === 'Policy' || getCategory(link.url) === 'Site Structure');
+
+        policyOrder.forEach(slugEnd => {
+            const link = policyLinks.find(l => l.url.endsWith(`/${slugEnd}/`));
+            if (link) {
+                const a = document.createElement('a');
+                a.href = link.url;
+                a.textContent = generateAnchorText(link.url);
+                footerNav.appendChild(a);
+            }
+        });
+         // Add any remaining policy/site links not in the preferred order
+        policyLinks.forEach(link => {
+            if (!policyOrder.some(slugEnd => link.url.endsWith(`/${slugEnd}/`))) {
+                const a = document.createElement('a');
+                a.href = link.url;
+                a.textContent = generateAnchorText(link.url);
+                footerNav.appendChild(a);
+            }
+        });
+    }
+
+    </script>
+</body>
+</html>
