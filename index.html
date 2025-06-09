@@ -128,6 +128,7 @@
     </script>
 
     <style>
+        /* --- Base and Layout Styles --- */
         /* --- CRITICAL CSS --- */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -355,7 +356,7 @@
             border-radius: 4px;
             padding: clamp(0.2rem, 1vw, 0.3rem);
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
             aspect-ratio: 1;
             display: flex;
             flex-direction: column;
@@ -377,6 +378,7 @@
         .element.liquid { border: var(--liquid-border); }
         .element.gas { border: var(--gas-border); }
         
+        /* --- Element Cell Styles --- */
         .atomic-number {
             font-size: clamp(0.6rem, 1.5vw, 0.7rem);
             width: 100%;
@@ -414,6 +416,7 @@
         .category-actinide { background-color: var(--actinide-color); }
         .category-unknown { background-color: var(--unknown-color); }
         
+        /* --- Empty Cell & Series Placeholders --- */
         .empty {
             background-color: transparent !important;
             border: none !important;
@@ -438,6 +441,7 @@
             grid-column: span 1;
         }
         
+        /* --- Tooltip Styles --- */
         .tooltip {
             position: absolute;
             background-color: rgba(0, 0, 0, 0.9);
@@ -449,7 +453,8 @@
             max-width: 90vw;
             pointer-events: none;
             opacity: 0;
-            transition: opacity 0.2s;
+            visibility: hidden; /* Start hidden */
+            transition: opacity 0.2s ease-in-out, visibility 0s linear 0.2s; /* Delay visibility change when hiding */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             font-size: 0.8rem;
             line-height: 1.4;
@@ -460,9 +465,15 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
             padding-bottom: 0.3rem;
         }
+        .tooltip[aria-hidden="false"] {
+            opacity: 1;
+            visibility: visible;
+            transition-delay: 0s, 0s; /* Ensure visibility transition is immediate when showing */
+        }
         .tooltip-row { display: flex; justify-content: space-between; margin-bottom: 0.2rem; }
         .tooltip-label { font-weight: bold; color: #aaa; }
         
+        /* --- Modal Styles --- */
         .modal {
             display: none;
             position: fixed;
@@ -519,7 +530,7 @@
             background-color: transparent;
             color: var(--text-color);
             border: 1px solid transparent;
-            transition: background-color 0.2s, border-color 0.2s;
+            transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
         }
         
         .close-button:hover, .close-button:focus {
@@ -530,6 +541,7 @@
         .modal-body { flex: 1; overflow: hidden; }
         iframe { width: 100%; height: 100%; border: none; }
         
+        /* --- Footer Styles --- */
         .site-footer {
             background-color: #333;
             color: #f5f5f5;
@@ -590,11 +602,11 @@
         .toggle-switch input { opacity: 0; width: 0; height: 0; }
         .toggle-slider {
             position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
-            background-color: #ccc; transition: .4s; border-radius: 24px;
+            background-color: #ccc; transition: background-color 0.4s ease-in-out; border-radius: 24px;
         }
         .toggle-slider:before {
             position: absolute; content: ""; height: 16px; width: 16px; left: 4px; bottom: 4px;
-            background-color: white; transition: .4s; border-radius: 50%;
+            background-color: white; transition: transform 0.4s ease-in-out; border-radius: 50%;
         }
         input:checked + .toggle-slider { background-color: var(--focus-outline-color); }
         input:checked + .toggle-slider:before { transform: translateX(26px); }
@@ -607,13 +619,21 @@
         }
         .dark-mode-label { font-size: 0.9rem; }
         
+        /* --- Property Color Coding Styles --- */
         .color-map-gradient { width: 100%; height: 20px; margin-top: 0.5rem; border-radius: 4px;
             background: linear-gradient(to right, blue, cyan, green, yellow, red); }
         .gradient-labels { display: flex; justify-content: space-between; font-size: 0.7rem; margin-top: 0.2rem; }
 
+        /* --- Element Highlight Styles --- */
         .element.search-highlight {
-            box-shadow: 0 0 0 3px var(--focus-outline-color), 0 4px 8px rgba(0,0,0,0.3);
+            box-shadow: 0 0 0 3px var(--focus-outline-color), 0 0 15px var(--focus-outline-color);
             transform: scale(1.05);
+            transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+
+        .filtered-active {
+            transform: scale(1.03);
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
         }
 
         .visually-hidden {
@@ -628,6 +648,7 @@
             border: 0;
         }
         
+        /* --- Content Sections (Intro, Features) --- */
         #intro, #features {
             max-width: 900px;
             margin: 2rem auto;
@@ -685,6 +706,7 @@
             }
         }
 
+        /* --- Desktop Sidebar and Accordion Overrides --- */
         @media (min-width: 992px) {
             .main-content {
                 flex-direction: row;
@@ -695,17 +717,73 @@
                 margin-bottom: 0;
                 width: 250px;
             }
-             .filter-options {
+             .filter-options { /* Desktop: Revert to column layout for filter options inside sidebar */
                 flex-direction: column;
                 gap: 0.5rem;
             }
-            .filter-option { margin-right: 0; }
+            .filter-option { margin-right: 0; } /* Desktop: Remove right margin if it was for row layout */
             .periodic-table {
                 grid-template-columns: repeat(18, minmax(60px, 1fr));
             }
             .lanthanide-row, .actinide-row {
                  grid-template-columns: repeat(15, 1fr);
              }
+            /* Ensure filter content is always visible on desktop */
+            .filter-options-content {
+                display: block !important;
+                max-height: none !important;
+                overflow: visible !important;
+                padding-top: 0; /* Reset padding if it was for accordion */
+                padding-bottom: 0; /* Reset padding if it was for accordion */
+            }
+            .filter-toggle-button {
+                 display: none;
+            }
+            .filter-toggle-button .toggle-icon {
+                display: none;
+            }
+        }
+
+        /* --- Mobile Accordion Styles --- */
+        @media (max-width: 991px) {
+            .filter-toggle-button {
+                width: 100%;
+                text-align: left;
+                background: var(--hover-color);
+                border: none;
+                padding: 0.75rem;
+                cursor: pointer;
+                font-size: 1rem;
+                font-weight: bold;
+                color: var(--text-color);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .filter-group h3 { /* Remove bottom border from h3 when button is used */
+                border-bottom: none;
+                margin-bottom: 0; /* Remove margin that was for the h3 only */
+            }
+            .filter-toggle-button .toggle-icon {
+                transition: transform 0.3s ease-in-out;
+            }
+            .filter-toggle-button[aria-expanded="true"] .toggle-icon {
+                transform: rotate(180deg);
+            }
+            .filter-options-content {
+                transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+                overflow: hidden;
+                max-height: 0;
+                /* padding-top: 0; padding-bottom: 0; */ /* Control padding during transition */
+            }
+            .filter-options-content[aria-hidden="false"] {
+                max-height: 500px; /* Adjust as needed, should be enough to show content */
+                /* padding-top: 0.5rem; padding-bottom: 0.5rem; */
+            }
+             .filter-options { /* Add some padding back to the options when visible */
+                padding-top: 0.75rem;
+                padding-bottom: 0.75rem;
+            }
         }
         
         @media (max-width: 480px) {
@@ -844,37 +922,54 @@
     <main class="main-content" role="main">
         <aside class="sidebar" role="complementary">
             <div class="filter-group">
-                <h3>Filter by Category</h3>
-                <div class="filter-options" id="category-filters" role="group" aria-labelledby="category-filter-heading">
-                    <h4 id="category-filter-heading" class="visually-hidden">Element Category Filters</h4>
-                    </div>
-            </div>
-            
-            <div class="filter-group">
-                <h3>Filter by State <span class="visually-hidden">at current temperature</span></h3>
-                <div class="filter-options" id="state-filters" role="group" aria-labelledby="state-filter-heading">
-                    <h4 id="state-filter-heading" class="visually-hidden">Element State Filters</h4>
-                    <div class="filter-option">
-                        <input type="checkbox" id="state-solid" class="state-filter" checked data-state="solid">
-                        <label for="state-solid">Solid</label>
-                    </div>
-                    <div class="filter-option">
-                        <input type="checkbox" id="state-liquid" class="state-filter" checked data-state="liquid">
-                        <label for="state-liquid">Liquid</label>
-                    </div>
-                    <div class="filter-option">
-                        <input type="checkbox" id="state-gas" class="state-filter" checked data-state="gas">
-                        <label for="state-gas">Gas</label>
+                <h3>
+                    <button type="button" class="filter-toggle-button" aria-expanded="true" aria-controls="category-filters-content">
+                        Filter by Category <span class="toggle-icon" aria-hidden="true">&#9660;</span>
+                    </button>
+                </h3>
+                <div class="filter-options-content" id="category-filters-content" role="region" aria-hidden="false">
+                    <div class="filter-options" id="category-filters" role="group" aria-labelledby="category-filter-heading">
+                        <h4 id="category-filter-heading" class="visually-hidden">Element Category Filters</h4>
                     </div>
                 </div>
             </div>
             
             <div class="filter-group">
-                <h3>Filter by Metallic Character</h3>
-                <div class="filter-options" id="metallic-filters" role="group" aria-labelledby="metallic-filter-heading">
-                     <h4 id="metallic-filter-heading" class="visually-hidden">Metallic Character Filters</h4>
-                    <div class="filter-option">
-                        <input type="checkbox" id="metallic-metal" class="metallic-filter" checked data-character="metal">
+                <h3>
+                    <button type="button" class="filter-toggle-button" aria-expanded="false" aria-controls="state-filters-content">
+                        Filter by State <span class="toggle-icon" aria-hidden="true">&#9660;</span>
+                    </button>
+                </h3>
+                <div class="filter-options-content" id="state-filters-content" role="region" aria-hidden="true">
+                    <div class="filter-options" id="state-filters" role="group" aria-labelledby="state-filter-heading">
+                        <h4 id="state-filter-heading" class="visually-hidden">Element State Filters</h4>
+                        <div class="filter-option">
+                            <input type="checkbox" id="state-solid" class="state-filter" checked data-state="solid">
+                            <label for="state-solid">Solid</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="state-liquid" class="state-filter" checked data-state="liquid">
+                            <label for="state-liquid">Liquid</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="state-gas" class="state-filter" checked data-state="gas">
+                            <label for="state-gas">Gas</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="filter-group">
+                <h3>
+                    <button type="button" class="filter-toggle-button" aria-expanded="false" aria-controls="metallic-filters-content">
+                        Filter by Metallic Character <span class="toggle-icon" aria-hidden="true">&#9660;</span>
+                    </button>
+                </h3>
+                <div class="filter-options-content" id="metallic-filters-content" role="region" aria-hidden="true">
+                    <div class="filter-options" id="metallic-filters" role="group" aria-labelledby="metallic-filter-heading">
+                        <h4 id="metallic-filter-heading" class="visually-hidden">Metallic Character Filters</h4>
+                        <div class="filter-option">
+                            <input type="checkbox" id="metallic-metal" class="metallic-filter" checked data-character="metal">
                         <label for="metallic-metal">Metals</label>
                     </div>
                     <div class="filter-option">
@@ -2673,6 +2768,8 @@
     <div class="visually-hidden">
         <p>This interactive periodic table allows users to explore chemical elements, their properties, and states at different temperatures. Click on an element to view detailed information from Wikipedia. Use filters to narrow down elements by category, state, or metallic character. Color coding can be changed to visualize various atomic properties.</p>
     </div>
+
+    <div id="live-region" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
     
     <script defer>
         // DOM element references
@@ -2696,56 +2793,64 @@
         const siteHeader = document.querySelector('.site-header'); 
 
         // Global variables
-        let currentTemperature = 25;
-        let currentProperty = 'category';
-        let useLogScale = false;
-        let activeFilters = {
+        let currentTemperature = 25; // Celsius
+        let currentProperty = 'category'; // Property used for coloring elements
+        let useLogScale = false; // Whether to use logarithmic scale for property coloring
+        let activeFilters = { // Stores the currently active filter criteria
             categories: [],
-            states: ['solid', 'liquid', 'gas'],
-            metallic: ['metal', 'metalloid', 'nonmetal']
+            states: ['solid', 'liquid', 'gas'], // Default to all states visible
+            metallic: ['metal', 'metalloid', 'nonmetal'] // Default to all metallic types visible
         };
 
-        let focusedElement = null; 
-        let lastOpenedElementButton = null;
-        let lastScrollTop = 0; 
+        let focusedElement = null; // Tracks the element that had focus before modal opened
+        let lastOpenedElementButton = null; // Tracks the specific element button that opened the modal
+        let lastScrollTop = 0; // Used for header hide/show logic on scroll
 
 
-        // Helper function to generate a heat map color
+        /**
+         * Generates a color for heat map visualization based on a value within a min/max range.
+         * @param {number} value - The value to map to a color.
+         * @param {number} min - The minimum value in the dataset.
+         * @param {number} max - The maximum value in the dataset.
+         * @param {boolean} [isLog=false] - Whether to use a logarithmic scale.
+         * @returns {string} An RGBA color string.
+         */
         function getHeatMapColor(value, min, max, isLog = false) {
-            if (isLog && value > 0 && min > 0 && max > 0) {
+            if (isLog && value > 0 && min > 0 && max > 0) { // Apply log scale if specified and values are positive
                 value = Math.log10(value);
                 min = Math.log10(min);
                 max = Math.log10(max);
             }
             
-            const normalized = (value - min) / (max - min);
+            const normalized = (value - min) / (max - min); // Normalize value to 0-1 range
             
-            if (isNaN(normalized) || !isFinite(normalized)) {
-                return 'rgba(200, 200, 200, 0.5)';
+            if (isNaN(normalized) || !isFinite(normalized)) { // Handle invalid or out-of-range values
+                return 'rgba(200, 200, 200, 0.5)'; // Default to a light gray
             }
             
+            // Color mapping: Blue (low) -> Cyan -> Green -> Yellow -> Red (high)
             let r, g, b;
-            if (normalized < 0.25) { 
+            if (normalized < 0.25) { // Blue to Cyan
                 r = 0;
                 g = Math.round(normalized * 4 * 255);
                 b = 255;
-            } else if (normalized < 0.5) { 
+            } else if (normalized < 0.5) { // Cyan to Green
                 r = 0;
                 g = 255;
                 b = Math.round((1 - (normalized - 0.25) * 4) * 255);
-            } else if (normalized < 0.75) { 
+            } else if (normalized < 0.75) { // Green to Yellow
                 r = Math.round(((normalized - 0.5) * 4) * 255);
                 g = 255;
                 b = 0;
-            } else { 
+            } else { // Yellow to Red
                 r = 255;
                 g = Math.round((1 - (normalized - 0.75) * 4) * 255);
                 b = 0;
             }
-            return `rgba(${r}, ${g}, ${b}, 0.8)`;
+            return `rgba(${r}, ${g}, ${b}, 0.8)`; // Return RGBA color with some transparency
         }
         
-        // Element Data
+        // Element Data (Sample - Full data is extensive)
         const elements = [
             {
                 atomicNumber: 1,
@@ -4483,11 +4588,16 @@
             }
         ];
 
-
-        // Initialize the periodic table
+        /**
+         * Initializes the periodic table on page load.
+         * Clears existing table content, then populates cells for main elements,
+         * lanthanide series, and actinide series. Also creates category filters
+         * and applies initial filtering.
+         */
         function initPeriodicTable() {
-            periodicTableEl.innerHTML = '';
+            periodicTableEl.innerHTML = ''; // Clear any existing table content
             
+            // Create main grid cells
             for (let period = 1; period <= 7; period++) {
                 for (let group = 1; group <= 18; group++) {
                     const cell = document.createElement('div');
@@ -4545,30 +4655,38 @@
                  actinideRow.appendChild(cell);
             });
 
-            if(lanthanideRow.hasChildNodes()) periodicTableEl.appendChild(lanthanideRow);
-            if(actinideRow.hasChildNodes()) periodicTableEl.appendChild(actinideRow);
+            if(lanthanideRow.hasChildNodes()) periodicTableEl.appendChild(lanthanideRow); // Add Lanthanide row if populated
+            if(actinideRow.hasChildNodes()) periodicTableEl.appendChild(actinideRow); // Add Actinide row if populated
 
-            createCategoryFilters();
-            applyFilters();
+            createCategoryFilters(); // Dynamically create category filter checkboxes
+            applyFilters(); // Apply initial filters (which also updates colors and states)
         }
 
-        // Configure a single element cell
+        /**
+         * Configures a single element cell in the periodic table.
+         * Sets data attributes, ARIA attributes, classes for styling (category, state),
+         * inner HTML content (atomic number, symbol, name, weight), and attaches event listeners.
+         * @param {HTMLElement} cell - The div element representing the cell.
+         * @param {object} elementData - The data object for the element.
+         */
         function configureElementCell(cell, elementData) {
             cell.classList.add('element');
-            cell.dataset.atomicNumber = elementData.atomicNumber;
-            cell.dataset.category = elementData.category;
-            cell.dataset.metallic = elementData.metallic;
+            cell.dataset.atomicNumber = elementData.atomicNumber; // Store atomic number for easy access
+            cell.dataset.category = elementData.category; // Store category for filtering
+            cell.dataset.metallic = elementData.metallic; // Store metallic character for filtering
             
+            // Accessibility attributes
             cell.setAttribute('role', 'button');
-            cell.setAttribute('tabindex', '0');
+            cell.setAttribute('tabindex', '0'); // Make cell focusable
             cell.setAttribute('aria-label', `${elementData.name} (${elementData.symbol}), Atomic Number ${elementData.atomicNumber}`);
 
-            const state = getElementState(elementData);
-            cell.classList.add(state);
-            cell.dataset.state = state;
+            const state = getElementState(elementData); // Determine current physical state
+            cell.classList.add(state); // Add class for state-specific styling (e.g., border)
+            cell.dataset.state = state; // Store state for filtering
             
-            setElementColor(cell, elementData);
+            setElementColor(cell, elementData); // Set initial color based on current property
             
+            // Populate cell content
             cell.innerHTML = `
                 <div class="atomic-number" aria-hidden="true">${elementData.atomicNumber}</div>
                 <div class="symbol" aria-hidden="true">${elementData.symbol}</div>
@@ -4576,150 +4694,198 @@
                 <div class="atomic-weight" aria-hidden="true">${elementData.atomicWeight}</div>
             `;
             
-            cell.addEventListener('click', () => {
-                lastOpenedElementButton = cell;
+            // Event listeners for interaction
+            cell.addEventListener('click', () => { // Click to show details
+                lastOpenedElementButton = cell; // Store this cell as the one that opened the modal
                 showElementDetails(elementData);
             });
-            cell.addEventListener('keydown', (e) => {
+            cell.addEventListener('keydown', (e) => { // Keyboard activation (Enter or Space)
                 if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
+                    e.preventDefault(); // Prevent default spacebar scroll
                     lastOpenedElementButton = cell;
                     showElementDetails(elementData);
                 }
             });
+            // Tooltip event listeners
             cell.addEventListener('mouseenter', (e) => showTooltip(e, elementData));
             cell.addEventListener('mouseleave', hideTooltip);
-            cell.addEventListener('focus', (e) => showTooltip(e, elementData));
-            cell.addEventListener('blur', hideTooltip);
+            cell.addEventListener('focus', (e) => showTooltip(e, elementData)); // Show tooltip on focus for keyboard users
+            cell.addEventListener('blur', hideTooltip); // Hide tooltip on blur
         }
         
-        // Create category filters
+        /**
+         * Dynamically creates filter checkboxes for element categories.
+         * Populates the category filters container with checkboxes based on unique categories
+         * found in the `elements` data. Each checkbox is styled and has an event listener
+         * to update filters when changed.
+         */
         function createCategoryFilters() {
-            const uniqueCategories = [...new Set(elements.map(e => e.category))];
-            categoryFiltersContainer.innerHTML = '';
+            const uniqueCategories = [...new Set(elements.map(e => e.category))]; // Get unique categories from element data
+            categoryFiltersContainer.innerHTML = ''; // Clear existing filters
             
-            uniqueCategories.forEach(category => {
+            uniqueCategories.forEach(category => { // Create a filter option for each category
                 const option = document.createElement('div');
                 option.classList.add('filter-option');
                 
                 const checkbox = document.createElement('input');
                 checkbox.type = 'checkbox';
-                checkbox.id = `category-${category.replace(/\s+/g, '-')}`;
+                checkbox.id = `category-${category.replace(/\s+/g, '-')}`; // Generate unique ID
                 checkbox.className = 'category-filter';
-                checkbox.checked = true;
+                checkbox.checked = true; // Default to checked
                 checkbox.dataset.category = category;
                 
                 const label = document.createElement('label');
                 label.htmlFor = checkbox.id;
-                label.textContent = category.replace(/(-)/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+                label.textContent = category.replace(/(-)/g, ' ').replace(/\b\w/g, l => l.toUpperCase()); // Format category name for display
                 
-                const colorSample = document.createElement('span');
+                const colorSample = document.createElement('span'); // Color swatch for the legend
                 colorSample.style.display = 'inline-block';
                 colorSample.style.width = '12px';
                 colorSample.style.height = '12px';
                 colorSample.style.marginRight = '5px';
-                try {
+                try { // Try to get color from CSS variables
                     colorSample.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue(`--${category}-color`).trim();
-                } catch (e) {
+                } catch (e) { // Default if variable not found
                     colorSample.style.backgroundColor = 'var(--unknown-color)';
                 }
                 colorSample.style.borderRadius = '2px';
-                label.prepend(colorSample);
+                label.prepend(colorSample); // Add color swatch before label text
                 
                 option.appendChild(checkbox);
                 option.appendChild(label);
                 categoryFiltersContainer.appendChild(option);
                 
+                // Event listener to update filters on change
                 checkbox.addEventListener('change', () => {
                     if (checkbox.checked) {
                         if (!activeFilters.categories.includes(category)) activeFilters.categories.push(category);
                     } else {
                         activeFilters.categories = activeFilters.categories.filter(c => c !== category);
                     }
-                    applyFilters();
+                    applyFilters(); // Re-apply filters after change
                 });
-                if (!activeFilters.categories.includes(category)) activeFilters.categories.push(category);
+                if (!activeFilters.categories.includes(category)) activeFilters.categories.push(category); // Initialize active filters
             });
         }
 
-        // Get element state
+        /**
+         * Determines the physical state (solid, liquid, gas) of an element at the current temperature.
+         * @param {object} element - The element data object.
+         * @returns {string} The state of the element ('solid', 'liquid', or 'gas').
+         */
         function getElementState(element) {
-            if (element.meltingPoint === null || typeof currentTemperature !== 'number') return 'solid';
-            if (element.boilingPoint === null && currentTemperature >= element.meltingPoint) return 'liquid';
+            if (element.meltingPoint === null || typeof currentTemperature !== 'number') return 'solid'; // Default to solid if data is missing
+            if (element.boilingPoint === null && currentTemperature >= element.meltingPoint) return 'liquid'; // If no boiling point, assume liquid above melting
             if (currentTemperature < element.meltingPoint) return 'solid';
             else if (currentTemperature >= element.meltingPoint && currentTemperature < element.boilingPoint) return 'liquid';
             else return 'gas';
         }
 
-        // Set element color
+        /**
+         * Sets the background color of an element cell.
+         * If `currentProperty` is 'category', it applies a category-specific class.
+         * Otherwise, it calculates a color based on the element's value for the `currentProperty`
+         * using the heat map function.
+         * @param {HTMLElement} cell - The div element representing the cell.
+         * @param {object} elementData - The data object for the element.
+         */
         function setElementColor(cell, elementData) {
-            cell.className = cell.className.replace(/category-\w+(-\w+)?/g, '').trim();
-            cell.style.backgroundColor = '';
+            cell.className = cell.className.replace(/category-\w+(-\w+)?/g, '').trim(); // Remove existing category color classes
+            cell.style.backgroundColor = ''; // Reset direct background color
 
-            if (currentProperty === 'category') {
+            if (currentProperty === 'category') { // Color by element category
                 cell.classList.add(`category-${elementData.category}`);
-            } else {
+            } else { // Color by selected property (heat map)
                 const value = elementData[currentProperty];
-                if (value === null || value === undefined) {
+                if (value === null || value === undefined) { // Handle missing data for the property
                     cell.style.backgroundColor = 'var(--unknown-color)';
                     return;
                 }
+                // Get all valid numerical values for the current property to determine min/max for heat map
                 const validValues = elements
                     .map(e => e[currentProperty])
                     .filter(v => v !== null && v !== undefined && typeof v === 'number')
                     .sort((a, b) => a - b);
                 
-                if(validValues.length === 0) {
+                if(validValues.length === 0) { // If no valid values, use unknown color
                      cell.style.backgroundColor = 'var(--unknown-color)';
                      return;
                 }
                 let minValue = validValues[0];
                 let maxValue = validValues[validValues.length - 1];
-                cell.style.backgroundColor = getHeatMapColor(value, minValue, maxValue, useLogScale);
+                cell.style.backgroundColor = getHeatMapColor(value, minValue, maxValue, useLogScale); // Apply heat map color
             }
         }
 
-        // Apply filters
+        /**
+         * Applies all active filters to the periodic table elements.
+         * Iterates through each element cell, checks if it matches the current filter criteria
+         * (category, state, metallic character, search term), and updates its visibility
+         * and highlight status. Also updates an ARIA live region with the count of visible elements.
+         */
         function applyFilters() {
             const allElementCells = document.querySelectorAll('.element:not(.empty)');
-            const searchTerm = elementSearch.value.toLowerCase().trim();
+            const searchTerm = elementSearch.value.toLowerCase().trim(); // Get and normalize search term
 
-            allElementCells.forEach(cell => {
+            allElementCells.forEach(cell => { // Iterate through each element cell
                 const atomicNumber = parseInt(cell.dataset.atomicNumber);
                 const elementData = elements.find(e => e.atomicNumber === atomicNumber);
-                if (!elementData) return;
+                if (!elementData) return; // Skip if no data found (should not happen)
 
                 const category = elementData.category;
-                const state = cell.dataset.state;
+                const state = cell.dataset.state; // Get current state from cell's data attribute
                 const metallic = elementData.metallic;
                 
+                // Check if element matches all active filter criteria
                 const categoryMatch = activeFilters.categories.includes(category);
                 const stateMatch = activeFilters.states.includes(state);
                 const metallicMatch = activeFilters.metallic.includes(metallic);
                 
-                let searchMatch = true;
+                let searchMatch = true; // Assume match unless search term exists and doesn't match
                 if (searchTerm) {
                     const nameMatch = elementData.name.toLowerCase().includes(searchTerm);
                     const symbolMatch = elementData.symbol.toLowerCase().includes(searchTerm);
                     const numberMatch = elementData.atomicNumber.toString().includes(searchTerm);
-                    searchMatch = nameMatch || symbolMatch || numberMatch;
+                    searchMatch = nameMatch || symbolMatch || numberMatch; // Element matches if any of these are true
                 }
                 
+                // Determine visibility based on filter matches
                 if (categoryMatch && stateMatch && metallicMatch && searchMatch) {
-                    cell.style.display = '';
-                    cell.classList.remove('search-highlight');
-                    if (searchTerm && searchMatch) cell.classList.add('search-highlight');
+                    cell.style.display = ''; // Show cell
+                    cell.classList.add('filtered-active'); // Add class for non-hovered filtered elements
+                    cell.classList.remove('search-highlight'); // Clear previous search highlight
+                    if (searchTerm && searchMatch) cell.classList.add('search-highlight'); // Add highlight if it matches current search
                     cell.removeAttribute('aria-hidden');
-
                 } else {
-                    cell.style.display = 'none';
+                    cell.style.display = 'none'; // Hide cell
+                    cell.classList.remove('filtered-active');
                     cell.classList.remove('search-highlight');
                     cell.setAttribute('aria-hidden', 'true');
                 }
             });
+
+            // Update ARIA live region with the count of visible elements
+            const liveRegion = document.getElementById('live-region');
+            if (liveRegion) {
+                let visibleCount = 0;
+                allElementCells.forEach(cell => {
+                    if (cell.style.display !== 'none') {
+                        visibleCount++;
+                    }
+                });
+                liveRegion.textContent = ''; // Clear previous message
+                setTimeout(() => { // Use timeout to ensure screen readers announce the change
+                    liveRegion.textContent = `Periodic table updated. ${visibleCount} elements now displayed.`;
+                }, 50);
+            }
         }
 
-        // Show tooltip
+        /**
+         * Shows the tooltip for an element.
+         * Populates the tooltip with element data and positions it near the target element.
+         * @param {Event} event - The mouseenter or focus event.
+         * @param {object} elementData - The data object for the element.
+         */
         function showTooltip(event, elementData) {
             elementTooltip.innerHTML = `
                 <h4>${elementData.name} (${elementData.symbol})</h4>
@@ -4732,61 +4898,86 @@
                 ${elementData.boilingPoint !== null ? `<div class="tooltip-row"><span class="tooltip-label">Boil:</span><span>${elementData.boilingPoint}°C</span></div>` : ''}
             `;
             
+            // Position tooltip relative to the element
             const targetRect = event.target.getBoundingClientRect();
-            const tooltipRect = elementTooltip.getBoundingClientRect();
-            let top = targetRect.bottom + window.scrollY + 10;
-            let left = targetRect.left + window.scrollX + (targetRect.width / 2) - (tooltipRect.width / 2);
-            if (left < 0) left = 5;
-            if (left + tooltipRect.width > window.innerWidth) left = window.innerWidth - tooltipRect.width - 5;
-            if (top + tooltipRect.height > window.innerHeight && targetRect.top - tooltipRect.height - 10 > 0) {
-                 top = targetRect.top + window.scrollY - tooltipRect.height - 10;
+            const tooltipRect = elementTooltip.getBoundingClientRect(); // Get tooltip dimensions
+            let top = targetRect.bottom + window.scrollY + 10; // Default below element
+            let left = targetRect.left + window.scrollX + (targetRect.width / 2) - (tooltipRect.width / 2); // Center horizontally
+
+            // Adjust if tooltip goes off-screen
+            if (left < 0) left = 5; // Prevent left overflow
+            if (left + tooltipRect.width > window.innerWidth) left = window.innerWidth - tooltipRect.width - 5; // Prevent right overflow
+            if (top + tooltipRect.height > window.innerHeight && targetRect.top - tooltipRect.height - 10 > 0) { // If overflows bottom and can fit above
+                 top = targetRect.top + window.scrollY - tooltipRect.height - 10; // Position above element
             }
+
             elementTooltip.style.left = `${left}px`;
             elementTooltip.style.top = `${top}px`;
-            elementTooltip.style.opacity = 1;
+            elementTooltip.style.opacity = 1; // Make visible
             elementTooltip.setAttribute('aria-hidden', 'false');
         }
 
-        // Hide tooltip
+        /**
+         * Hides the tooltip by setting its opacity to 0 and aria-hidden to true.
+         */
         function hideTooltip() {
-            elementTooltip.style.opacity = 0;
+            elementTooltip.style.opacity = 0; // Make invisible
             elementTooltip.setAttribute('aria-hidden', 'true');
         }
 
-        // Show element details in modal
+        /**
+         * Shows the modal with detailed information for a given element.
+         * Populates the modal title and iframe source with element data,
+         * makes the modal visible, and manages focus.
+         * @param {object} elementData - The data object for the element.
+         */
         function showElementDetails(elementData) {
-            modalTitle.textContent = `${elementData.name} (${elementData.symbol})`;
-            elementIframe.src = `https://en.wikipedia.org/wiki/${elementData.name}`;
-            elementModal.style.display = 'flex';
+            modalTitle.textContent = `${elementData.name} (${elementData.symbol})`; // Set modal title
+            elementIframe.src = `https://en.wikipedia.org/wiki/${elementData.name}`; // Load Wikipedia page in iframe
+            elementModal.style.display = 'flex'; // Make modal visible
             elementModal.removeAttribute('aria-hidden');
-            focusedElement = document.activeElement;
-            closeButton.focus();
-            elementModal.addEventListener('keydown', trapFocusInModal);
+            focusedElement = document.activeElement; // Store currently focused element to return focus later
+            closeButton.focus(); // Move focus to the close button within the modal
+            elementModal.addEventListener('keydown', trapFocusInModal); // Add focus trapping
         }
 
+        /**
+         * Traps focus within the modal when it's open.
+         * Allows tabbing only between focusable elements inside the modal.
+         * @param {KeyboardEvent} e - The keydown event.
+         */
         function trapFocusInModal(e) {
-            if (e.key !== 'Tab') return;
+            if (e.key !== 'Tab') return; // Only interested in Tab key presses
+
             const focusableElements = Array.from(elementModal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'));
             const firstFocusableElement = focusableElements[0];
             const lastFocusableElement = focusableElements[focusableElements.length - 1];
-            if (e.shiftKey) {
-                if (document.activeElement === firstFocusableElement) {
+
+            if (e.shiftKey) { // If Shift + Tab
+                if (document.activeElement === firstFocusableElement) { // If on first element, loop to last
                     lastFocusableElement.focus();
                     e.preventDefault();
                 }
-            } else {
-                if (document.activeElement === lastFocusableElement) {
+            } else { // If Tab
+                if (document.activeElement === lastFocusableElement) { // If on last element, loop to first
                     firstFocusableElement.focus();
                     e.preventDefault();
                 }
             }
         }
 
+        /**
+         * Closes the element details modal.
+         * Hides the modal, clears the iframe content, removes focus trapping,
+         * and returns focus to the element that opened the modal or the previously focused element.
+         */
         function closeModal() {
-            elementModal.style.display = 'none';
+            elementModal.style.display = 'none'; // Hide modal
             elementModal.setAttribute('aria-hidden', 'true');
-            elementIframe.src = 'about:blank';
-            elementModal.removeEventListener('keydown', trapFocusInModal);
+            elementIframe.src = 'about:blank'; // Clear iframe content to stop loading/playing
+            elementModal.removeEventListener('keydown', trapFocusInModal); // Remove focus trapping
+
+            // Return focus to the element that opened the modal or the last focused element
             if (lastOpenedElementButton) {
                 lastOpenedElementButton.focus();
                 lastOpenedElementButton = null;
@@ -4796,100 +4987,126 @@
             }
         }
 
-        // Update temperature
+        /**
+         * Updates the periodic table based on the current temperature.
+         * Updates the temperature display, re-evaluates the state of each element,
+         * and re-applies filters.
+         */
         function updateTemperature() {
-            temperatureValue.textContent = currentTemperature;
+            temperatureValue.textContent = currentTemperature; // Update displayed temperature value
             temperatureValue.setAttribute('aria-valuenow', currentTemperature);
             temperatureValue.setAttribute('aria-valuetext', `${currentTemperature}°C`);
+
             const allElementCells = document.querySelectorAll('.element:not(.empty)');
-            allElementCells.forEach(cell => {
+            allElementCells.forEach(cell => { // Update state class for each element
                 const atomicNumber = parseInt(cell.dataset.atomicNumber);
                 const elementData = elements.find(e => e.atomicNumber === atomicNumber);
                 if (elementData) {
-                    cell.classList.remove('solid', 'liquid', 'gas');
+                    cell.classList.remove('solid', 'liquid', 'gas'); // Remove old state class
                     const newState = getElementState(elementData);
-                    cell.classList.add(newState);
-                    cell.dataset.state = newState;
+                    cell.classList.add(newState); // Add new state class
+                    cell.dataset.state = newState; // Update data attribute
                 }
             });
-            applyFilters();
+            applyFilters(); // Re-apply filters as states might have changed
         }
 
-        // Update property coloring
+        /**
+         * Updates the color coding of elements based on the selected property.
+         * Iterates through each element cell and applies the appropriate color or class.
+         */
         function updatePropertyColoring() {
             const allElementCells = document.querySelectorAll('.element:not(.empty)');
             allElementCells.forEach(cell => {
                 const atomicNumber = parseInt(cell.dataset.atomicNumber);
                 const elementData = elements.find(e => e.atomicNumber === atomicNumber);
                 if (elementData) {
-                    setElementColor(cell, elementData);
+                    setElementColor(cell, elementData); // Re-apply color to each cell
                 }
             });
         }
 
-        // Toggle dark mode
+        /**
+         * Toggles dark mode for the page.
+         * Adds or removes the 'dark-mode' class on the body and saves the preference
+         * to localStorage.
+         */
         function toggleDarkMode() {
             document.body.classList.toggle('dark-mode');
             localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
         }
+        // Apply dark mode on load if previously set or perfers-color-scheme
         if (localStorage.getItem('darkMode') === 'true' || (localStorage.getItem('darkMode') === null && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
              document.body.classList.add('dark-mode');
              if (darkModeToggle) darkModeToggle.checked = true;
         }
 
-        // Search elements
+        /**
+         * Initiates filtering of elements based on the current search input value.
+         * Called when the search input changes.
+         */
         function searchElements() {
             applyFilters();
         }
 
-        // Print table
+        /**
+         * Opens the browser's print dialog to print the periodic table.
+         */
         function printTable() {
             window.print();
         }
 
-        // Reset filters
+        /**
+         * Resets all filters to their default states.
+         * Clears search input, resets temperature slider, re-checks all filter checkboxes,
+         * and re-applies filters and temperature/property coloring.
+         */
         function resetFilters() {
+            // Reset all filter checkboxes to checked
             document.querySelectorAll('.category-filter, .state-filter, .metallic-filter').forEach(checkbox => {
                 checkbox.checked = true;
             });
-            elementSearch.value = '';
-            temperatureSlider.value = 25;
-            currentTemperature = 25;
+            elementSearch.value = ''; // Clear search input
+            temperatureSlider.value = 25; // Reset temperature slider
+            currentTemperature = 25; // Reset current temperature variable
+
+            // Reset active filter criteria to defaults
             activeFilters = {
-                categories: [...new Set(elements.map(e => e.category))],
-                states: ['solid', 'liquid', 'gas'],
-                metallic: ['metal', 'metalloid', 'nonmetal']
+                categories: [...new Set(elements.map(e => e.category))], // All categories
+                states: ['solid', 'liquid', 'gas'], // All states
+                metallic: ['metal', 'metalloid', 'nonmetal'] // All metallic types
             };
-            updateTemperature();
-            updatePropertyColoring();
+            updateTemperature(); // Update states based on reset temperature
+            updatePropertyColoring(); // Update colors (will also call applyFilters)
         }
 
-        // Event Listeners
+        // --- Event Listeners Setup ---
         if (temperatureSlider) {
-            temperatureSlider.addEventListener('input', () => {
+            temperatureSlider.addEventListener('input', () => { // Update temperature on slider input
                 currentTemperature = parseInt(temperatureSlider.value);
                 updateTemperature();
             });
         }
         if (propertyFilter) {
-            propertyFilter.addEventListener('change', () => {
+            propertyFilter.addEventListener('change', () => { // Update property coloring on selection change
                 currentProperty = propertyFilter.value;
                 updatePropertyColoring();
             });
         }
         if (scaleToggle) {
-            scaleToggle.addEventListener('change', () => {
+            scaleToggle.addEventListener('change', () => { // Toggle log scale for property coloring
                 useLogScale = scaleToggle.checked;
                 updatePropertyColoring();
             });
         }
         if (elementSearch) {
-            elementSearch.addEventListener('input', searchElements);
+            elementSearch.addEventListener('input', searchElements); // Filter elements on search input
         }
         if (darkModeToggle) {
-            darkModeToggle.addEventListener('change', toggleDarkMode);
+            darkModeToggle.addEventListener('change', toggleDarkMode); // Toggle dark mode
         }
 
+        // Event listeners for state filter checkboxes
         stateFilters.forEach(checkbox => {
             checkbox.addEventListener('change', () => {
                 const state = checkbox.dataset.state;
@@ -4902,6 +5119,7 @@
             });
         });
 
+        // Event listeners for metallic character filter checkboxes
         metallicFilters.forEach(checkbox => {
             checkbox.addEventListener('change', () => {
                 const metallic = checkbox.dataset.character;
@@ -4914,46 +5132,96 @@
             });
         });
 
-        if (resetFiltersButton) resetFiltersButton.addEventListener('click', resetFilters);
-        if (printTableButton) printTableButton.addEventListener('click', printTable);
+        if (resetFiltersButton) resetFiltersButton.addEventListener('click', resetFilters); // Reset all filters
+        if (printTableButton) printTableButton.addEventListener('click', printTable); // Print table
 
+        // Modal close event listeners
         if (closeButton) closeButton.addEventListener('click', closeModal);
         if (elementModal) {
-            elementModal.addEventListener('click', (e) => {
+            elementModal.addEventListener('click', (e) => { // Close modal if backdrop is clicked
                 if (e.target === elementModal) closeModal();
             });
-            window.addEventListener('keydown', (e) => {
+            window.addEventListener('keydown', (e) => { // Close modal on Escape key
                 if (e.key === 'Escape' && elementModal.style.display === 'flex') {
                     closeModal();
                 }
             });
         }
 
-        // Initialize
+        /**
+         * Main initialization function executed when the DOM is fully loaded.
+         * Checks for essential element data, initializes the periodic table,
+         * updates temperature display, and sets up header scroll behavior and filter accordions.
+         */
         document.addEventListener('DOMContentLoaded', () => {
+            // Critical check for element data
             if (typeof elements === 'undefined' || elements.length < 118) {
                  console.error("Element data is missing or incomplete. Table cannot be initialized.");
                  document.body.innerHTML = "<p style='color:red; font-size:1.2em; text-align:center; padding:20px;'>Error: Essential element data is missing. The periodic table cannot be displayed.</p>";
                  return;
             }
-            initPeriodicTable();
-            updateTemperature();
+            initPeriodicTable(); // Build the table structure
+            updateTemperature(); // Set initial element states based on default temperature
 
-            // Header hide/show on scroll
+            // Setup for hiding/showing header on scroll
             if (siteHeader) {
                 const headerHeight = siteHeader.offsetHeight;
                 window.addEventListener('scroll', function() {
                     let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
                     if (scrollTop > lastScrollTop && scrollTop > headerHeight) {
-                        // Scrolling Down
-                        siteHeader.classList.add('site-header--hidden');
+                        siteHeader.classList.add('site-header--hidden'); // Hide header on scroll down
                     } else {
-                        // Scrolling Up or at the top
-                        siteHeader.classList.remove('site-header--hidden');
+                        siteHeader.classList.remove('site-header--hidden'); // Show header on scroll up
                     }
-                    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+                    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scrolling
                 }, false);
             }
+
+            // Accordion functionality for sidebar filters
+            const filterToggleButtons = document.querySelectorAll('.filter-toggle-button');
+            filterToggleButtons.forEach(button => {
+                const contentId = button.getAttribute('aria-controls');
+                const contentElement = document.getElementById(contentId);
+
+                // Set initial visual state based on ARIA attributes from HTML
+                if (contentElement) {
+                    if (button.getAttribute('aria-expanded') === 'true') {
+                        contentElement.setAttribute('aria-hidden', 'false');
+                        // For initially expanded sections, ensure max-height allows content to be visible.
+                        // This can be set to a large enough static value in CSS for aria-hidden="false"
+                        // or calculated dynamically if needed, then set to null after transition.
+                        // The CSS already has max-height: 500px for [aria-hidden="false"] which should be sufficient.
+                    } else {
+                        contentElement.setAttribute('aria-hidden', 'true');
+                        contentElement.style.maxHeight = '0'; // Ensure initially collapsed sections are visually hidden
+                    }
+                }
+
+                button.addEventListener('click', () => {
+                    const isExpanded = button.getAttribute('aria-expanded') === 'true';
+                    button.setAttribute('aria-expanded', !isExpanded); // Toggle button's ARIA state
+
+                    if (contentElement) {
+                        contentElement.setAttribute('aria-hidden', isExpanded); // Toggle content's ARIA state
+                        if (!isExpanded) { // If expanding
+                            // Set max-height to its scrollHeight to animate open
+                            contentElement.style.maxHeight = contentElement.scrollHeight + "px";
+                            // Optional: After transition, set to 'none' or a large fixed value if content might resize dynamically
+                            setTimeout(() => {
+                                if(button.getAttribute('aria-expanded') === 'true') {
+                                   // contentElement.style.maxHeight = null; // Or use a large fixed value like '500px' from CSS
+                                }
+                            }, 300); // Match CSS transition duration
+                        } else { // If collapsing
+                            // Set max-height to current height then to 0 to animate closed
+                            contentElement.style.maxHeight = contentElement.scrollHeight + "px"; // Set to current height
+                            requestAnimationFrame(() => { // Allow browser to paint before setting to 0 for transition
+                                contentElement.style.maxHeight = '0';
+                            });
+                        }
+                    }
+                });
+            });
         });
 
     </script>
